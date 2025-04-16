@@ -1,0 +1,162 @@
+
+/*  1.Create a C++ class FixDeposit with data members FD No, Cust Name, FD Amt, Interest rate, Maturity amt, Number of months. Create and Initialize
+ all values of FixDeposit object by using parameterized constructor with default value for interest rate. Calculate maturity amt using interest rate 
+ and display all the details.[15 Marks]         */
+
+#include <iostream>
+using namespace std;
+
+class FixDeposit {
+private:
+    int fdNo;
+    string custName;
+    double fdAmt;
+    double interestRate;
+    double maturityAmt;
+    int numMonths;
+
+public:
+    FixDeposit(int fNo, string cName, double fAmt, int months, double rate = 5.0) {
+        fdNo = fNo;
+        custName = cName;
+        fdAmt = fAmt;
+        numMonths = months;
+        interestRate = rate;
+            maturityAmt = fdAmt + (fdAmt * interestRate * numMonths) / (100 * 12);
+    }
+    void display() {
+        cout << "\nFixed Deposit Details:" << endl;
+        cout << "FD Number: " << fdNo << endl;
+        cout << "Customer Name: " << custName << endl;
+        cout << "FD Amount: " << fdAmt << endl;
+        cout << "Interest Rate: " << interestRate << "%" << endl;
+        cout << "Number of Months: " << numMonths << endl;
+        cout << "Maturity Amount: " << maturityAmt << endl;
+    }
+};
+
+int main() {
+    FixDeposit fd1(101, "Bhagvat Shinde", 50000, 24);
+    fd1.display();
+    FixDeposit fd2(102, "Amol Patil", 70000, 36, 6.5);
+    fd2.display();
+    
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*  2.Create a C++ class InvoiceBill with data members Order id, O Date, Customer Name, No of Products, Prod Name[], Quantity[], Prod Price[]. 
+A Customer can buy ‘n’ products. Accept quantity for each product. Generate and Display the bill using appropriate Manipulators. (Use new operator)  [25 Marks]         */
+
+
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+class InvoiceBill {
+private:
+    int orderId;
+    string orderDate;
+    string customerName;
+    int numProducts;
+    string *prodName;
+    int *quantity;
+    double *prodPrice;
+public:
+    // Constructor to allocate memory dynamically and accept details
+    InvoiceBill() {
+        cout << "Enter Order ID: ";
+        cin >> orderId;
+        cout << "Enter Order Date (DD-MM-YYYY): ";
+        cin >> orderDate;
+        cout << "Enter Customer Name: ";
+        cin.ignore();
+        getline(cin, customerName);
+        cout << "Enter Number of Products: ";
+        cin >> numProducts;
+        
+        prodName = new string[numProducts];
+        quantity = new int[numProducts];
+        prodPrice = new double[numProducts];
+        
+        for (int i = 0; i < numProducts; i++) {
+            cout << "Enter Product Name, Quantity, and Price: ";
+            cin >> prodName[i] >> quantity[i] >> prodPrice[i];
+        }
+    }
+
+    // Function to display the invoice bill with manipulators
+    void displayBill() {
+        double totalAmount = 0;
+        cout << "\nInvoice Bill" << endl;
+        cout << "Order ID: " << orderId << " | Date: " << orderDate << " | Customer: " << customerName << endl;
+        cout << "-----------------------------------------------------------\n";
+        cout << left << setw(15) << "Product" << setw(10) << "Quantity" << setw(10) << "Price" << setw(10) << "Total" << endl;
+        cout << "-----------------------------------------------------------\n";
+        
+        for (int i = 0; i < numProducts; i++) {
+            double totalPrice = quantity[i] * prodPrice[i];
+            totalAmount += totalPrice;
+            cout << left << setw(15) << prodName[i] << setw(10) << quantity[i] << setw(10) << fixed << setprecision(2) << prodPrice[i] << setw(10) << totalPrice << endl;
+        }
+        
+        cout << "-----------------------------------------------------------\n";
+        cout << right << setw(35) << "Grand Total: " << fixed << setprecision(2) << totalAmount << endl;
+    }
+    
+    // Destructor to free memory
+    ~InvoiceBill() {
+        delete[] prodName;
+        delete[] quantity;
+        delete[] prodPrice;
+    }
+};
+
+int main() {
+    InvoiceBill *bill = new InvoiceBill();
+    bill->displayBill();
+    
+    delete bill;
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/css"?>
+ <collegeinfo>
+ <College>
+<Cname>FCC</Cname>
+<City>PUNE</City>
+<Rank>1</Rank>
+</College>
+ <College >
+<Cname>CCF</Cname>
+<City>PUNE</City>
+<Rank>2</Rank>
+</College>
+<College >
+<Cname>FC</Cname>
+<City>PUNE</City>
+<Rank>3</Rank>
+ </College>
+</collegeinfo>
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */

@@ -1,0 +1,269 @@
+
+/*   1.Write a C++ program to create a class Distance with data members meter and centimeter to represent distance. Write a function Larger( ) 
+to return the  larger of two distances. (Use this pointer)[15 Marks]        */
+
+#include <iostream.h>
+#include <conio.h>
+
+class Distance {
+private:
+    int meter;
+    int centimeter;
+
+public:
+    void acceptDetails() {
+        cout << "Enter meters: ";
+        cin >> meter;
+        cout << "Enter centimeters: ";
+        cin >> centimeter;
+    }
+
+    Distance* Larger(Distance &d) {
+        int thisTotal = this->meter * 100 + this->centimeter;
+        int otherTotal = d.meter * 100 + d.centimeter;
+        return (thisTotal > otherTotal) ? this : &d;
+    }
+
+    void display() {
+        cout << meter << " meters and " << centimeter << " centimeters\n";
+    }
+};
+
+void main() {
+    clrscr();
+    Distance d1, d2, *larger;
+
+    cout << "Enter first distance:\n";
+    d1.acceptDetails();
+    
+    cout << "Enter second distance:\n";
+    d2.acceptDetails();
+
+    larger = d1.Larger(d2);
+    cout << "Larger distance is: ";
+    larger->display();
+
+    getch();
+}
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*2.Create a C++ base class Media. Derive two different classes from it, class NewsPaper with data members N_Name, N_Editor, N_Price, No_of_Pages 
+and class Magazine with data members M_Name, M_Editor, M_Price. Write a C++ program to accept and display information of both NewsPaper and Magazine. 
+(Use pure virtual function)[25 Marks]        */
+
+#include <iostream.h>
+#include <conio.h>
+#include <string.h>
+
+class Media {
+public:
+    virtual void displayInfo() = 0;
+};
+
+class NewsPaper : public Media {
+private:
+    char N_Name[30], N_Editor[30];
+    float N_Price;
+    int No_of_Pages;
+
+public:
+    void acceptInfo() {
+        cout << "\nEnter Newspaper Name: ";
+        cin >> N_Name;
+        cout << "Enter Editor Name: ";
+        cin >> N_Editor;
+        cout << "Enter Price: ";
+        cin >> N_Price;
+        cout << "Enter Number of Pages: ";
+        cin >> No_of_Pages;
+    }
+
+    void displayInfo() {
+        cout << "\n--- Newspaper Details ---";
+        cout << "\nName: " << N_Name;
+        cout << "\nEditor: " << N_Editor;
+        cout << "\nPrice: Rs." << N_Price;
+        cout << "\nPages: " << No_of_Pages << "\n";
+    }
+};
+
+class Magazine : public Media {
+private:
+    char M_Name[30], M_Editor[30];
+    float M_Price;
+
+public:
+    void acceptInfo() {
+        cout << "\nEnter Magazine Name: ";
+        cin >> M_Name;
+        cout << "Enter Editor Name: ";
+        cin >> M_Editor;
+        cout << "Enter Price: ";
+        cin >> M_Price;
+    }
+
+    void displayInfo() {
+        cout << "\n--- Magazine Details ---";
+        cout << "\nName: " << M_Name;
+        cout << "\nEditor: " << M_Editor;
+        cout << "\nPrice: Rs." << M_Price << "\n";
+    }
+};
+
+void main() {
+    clrscr();
+    
+    NewsPaper np;
+    Magazine mg;
+
+    np.acceptInfo();
+    np.displayInfo();
+
+    mg.acceptInfo();
+    mg.displayInfo();
+
+    getch();
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<?php
+$xml = simplexml_load_file("slip19_a.xml");
+$stockArray = array();
+
+// Parse XML into array
+foreach ($xml->Item as $item) {
+    $stockArray[] = array(
+        "type" => (string)$item->type,
+        "name" => (string)$item->name,
+        "quantity" => (int)$item->quantity
+    );
+}
+
+echo "<pre>";
+print_r($stockArray);
+echo "</pre>";
+?>
+
+
+<?xml version="1.0"?>
+<StockList>
+    <Item>
+        <type>Fruit</type>
+        <name>Apple</name>
+        <quantity>100</quantity>
+    </Item>
+    <Item>
+        <type>Fruit</type>
+        <name>Mango</name>
+        <quantity>50</quantity>
+    </Item>
+    <Item>
+        <type>Vegetable</type>
+        <name>Tomato</name>
+        <quantity>75</quantity>
+    </Item>
+    <Item>
+        <type>Vegetable</type>
+        <name>Carrot</name>
+        <quantity>60</quantity>
+    </Item>
+</StockList>
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+<?xml version="1.0"?>
+<StockList>
+    <Item>
+        <type>Fruit</type>
+        <name>Apple</name>
+        <quantity>100</quantity>
+    </Item>
+    <Item>
+        <type>Fruit</type>
+        <name>Mango</name>
+        <quantity>50</quantity>
+    </Item>
+    <Item>
+        <type>Vegetable</type>
+        <name>Tomato</name>
+        <quantity>75</quantity>
+    </Item>
+    <Item>
+        <type>Vegetable</type>
+        <name>Carrot</name>
+        <quantity>60</quantity>
+    </Item>
+</StockList>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Info using AJAX</title>
+    <script>
+    function showBook(str) {
+        if (str == "") {
+            document.getElementById("bookDetails").innerHTML = "";
+            return;
+        }
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("bookDetails").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "slip19_b.php?book=" + str, true);
+        xhttp.send();
+    }
+    </script>
+</head>
+<body>
+
+<h2>Select a Book</h2>
+<select onchange="showBook(this.value)">
+    <option value="">--Select--</option>
+    <option value="Programming PHP">Programming PHP</option>
+    <option value="Learning JavaScript">Learning JavaScript</option>
+    <option value="HTML & CSS">HTML & CSS</option>
+</select>
+
+<div id="bookDetails" style="margin-top:20px;"></div>
+
+</body>
+</html>
+
+
+
+<?php
+if (isset($_GET['book'])) {
+    $bookName = $_GET['book'];
+    $xml = simplexml_load_file("slip19_b.xml");
+
+    foreach ($xml->Book as $book) {
+        if ((string)$book->name == $bookName) {
+            echo "<b>Name:</b> $book->name<br>";
+            echo "<b>Author:</b> $book->author<br>";
+            echo "<b>Year:</b> $book->year<br>";
+            echo "<b>Price:</b> ₹$book->price";
+            break;
+        }
+    }
+}
+?>
+
+
+

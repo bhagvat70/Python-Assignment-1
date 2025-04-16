@@ -1,0 +1,271 @@
+/*   1.Write a C++ program create two Classes Square and Rectangle. Compare area of both the shapes using friend function. Accept appropriate data 
+members for both the classes.[15 Marks]        */
+
+#include<iostream.h>
+#include<conio.h>
+ class sqaure
+ {
+    public:
+        int s;
+        void getdata()
+        {
+        cout<<"Enter side of square : ";
+        cin>>s;
+        }
+ 
+        int calarea()
+        {
+        return(s*s);
+        }
+        friend void compare(int s,int r);
+ };
+ 
+ class rectangle
+ {
+    public:
+        int l,w;
+        void getdata()
+        {
+        cout<<"Enter Length of Rectangle : ";
+        cin>>l;
+        cout<<"Enter Breadth of Rectangle : ";
+        cin>>w;
+        }
+ 
+        int calarea()
+        {
+        return(l*w);
+        }
+ 
+        friend void compare(int s,int r);
+ };
+ 
+ void compare(int s,int r)
+ {
+ if(s>r)
+ {
+ cout<<"\nThe area of sqaure is greater than area of rectangle"<<endl;
+ }
+ else
+ {
+ cout<<"\nThe area of rectangle is greater than area of sqaure"<<endl;
+ }
+ }
+ 
+ int main()
+ {
+ int s_area,r_area;
+ sqaure s;
+ rectangle r;
+ 
+ s.getdata();
+ s_area=s.calarea();
+ 
+ r.getdata();
+ r_area=r.calarea();
+ 
+ cout<<"\nSquare : " <<s_area<<endl;
+ cout<<"Rectangle : "<<r_area<<endl;
+ 
+ compare(s_area,r_area);
+ return 0;
+ }
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*  2.Create a class Matrix
+{
+int **p,r,c;
+public: //member functions
+};
+Write necessary functions to :
+1. accept matrix elements
+2. display matrix elements
+3. calculate transpose of a matrix
+(use constructor and destructor)[25 Marks]         */
+
+
+#include <iostream>
+using namespace std;
+
+class Matrix {
+    int **p, r, c;
+
+public:
+    Matrix(int x, int y) {
+        r = x;
+        c = y;
+        p = new int*[r];  
+        for (int i = 0; i < r; i++){
+            p[i] = new int[c];  
+        } 
+    }
+    ~Matrix() {
+        for (int i = 0; i < r; i++)
+            delete[] p[i];  
+        delete[] p;  
+        cout << "\nDestructor invoked...!";
+    }
+    void accept() {
+        cout << "\nEnter matrix elements:\n";
+        for (int i = 0; i < r; i++)
+            for (int j = 0; j < c; j++)
+                cin >> p[i][j];
+    }
+
+    void display() {
+        cout << "\nMatrix elements:\n";
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++)
+                cout << p[i][j] << "\t";
+            cout << endl;
+        }
+    }
+
+    void transpose() {
+        cout << "\nTranspose of matrix:\n";
+        for (int i = 0; i < c; i++) {
+            for (int j = 0; j < r; j++)
+                cout << p[j][i] << "\t";
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    int m, n;
+    cout << "\nEnter matrix size (rows cols): ";
+    cin >> m >> n;
+
+    Matrix ob(m, n);
+    ob.accept();
+    ob.display();
+    ob.transpose();
+
+    return 0;
+}
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*           */
+
+
+<?php
+// URL to be parsed
+$url = "http://www.college.com/Science/CS.php";
+
+// Parse the URL to get its components
+$parsed_url = parse_url($url);
+
+// Extract components from the parsed URL
+$scheme = isset($parsed_url['scheme']) ? $parsed_url['scheme'] : '';
+$host = isset($parsed_url['host']) ? $parsed_url['host'] : '';
+$path = isset($parsed_url['path']) ? $parsed_url['path'] : '';
+
+// Setting the response headers
+header('Content-Type: text/plain');
+echo "Scheme: " . $scheme . "\n";
+echo "Host: " . $host . "\n";
+echo "Path: " . $path . "\n";
+?>
+    
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE DATABASE sybbaca;
+
+USE sybbaca;
+
+CREATE TABLE emp (
+    eno INT AUTO_INCREMENT PRIMARY KEY,
+    ename VARCHAR(100),
+    designation VARCHAR(50),
+    salary FLOAT
+);
+
+
+INSERT INTO emp (ename, designation, salary) VALUES
+('Bhagvat', 'Manager', 55000),
+('Amol', 'Developer', 45000),
+('Sumit', 'Tester', 40000);
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Details</title>
+    <script>
+        function showDetails() {
+            var ename = document.getElementById("ename").value;
+            if (ename == "") {
+                document.getElementById("result").innerHTML = "";
+                return;
+            }
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "slip6_b.php?ename=" + ename, true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <h2>Select Employee Name:</h2>
+    <select id="ename" onchange="showDetails()">
+        <option value="">--Select--</option>
+        <option value="Bhagvat">Bhagvat</option>
+        <option value="Amol">Amol</option>
+        <option value="Sumit">Sumit</option>
+    </select>
+
+    <h3>Employee Details:</h3>
+    <div id="result"></div>
+</body>
+</html>
+
+-----------------------
+
+<?php
+$conn = mysqli_connect("localhost", "root", "", "sybbaca");
+
+if (!$conn) {
+    die("Connection failed");
+}
+
+if (isset($_GET['ename'])) {
+    $ename = $_GET['ename'];
+    $sql = "SELECT * FROM emp WHERE ename='$ename'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        echo "Emp No: " . $row['eno'] . "<br>";
+        echo "Name: " . $row['ename'] . "<br>";
+        echo "Designation: " . $row['designation'] . "<br>";
+        echo "Salary: " . $row['salary'] . "<br>";
+    } else {
+        echo "Employee not found.";
+    }
+}
+
+mysqli_close($conn);
+?>

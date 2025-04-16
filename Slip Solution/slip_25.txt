@@ -1,0 +1,174 @@
+/*  1. Write a C++ program to calculate mean, mode and median of three integer numbers. (Use Inline function)[15 Marks]         */
+
+#include<iostream.h>
+#include<conio.h>
+inline float mean (int a,int b,int c){
+	return (a+b+c)/3.0;
+}
+
+inline int mode(int a, int b, int c) {
+    if (a == b || a == c)
+        return a;
+    else if (b == c)
+        return b;
+    else
+        return -1; 
+}
+
+inline float medium (int a,int b,int c){
+	if((a>=b && a<=c)||(a>=c && a<=b)){
+		return a;
+	}
+	else if((b>=a && b<=c)||(b>=c && b<=a)){
+		return b;
+	}
+	else 
+		return c;
+}
+
+
+int main(){
+	int a,b,c;
+	clrscr();
+	cout<<"\nEnter three integers : ";
+	cin>>a>>b>>c;
+	
+	cout<<"\nMean : "<<mean(a,b,c);
+	cout<<"\nMedium : "<<medium(a,b,c);
+	
+	int modeValue = mode(a, b, c);
+    if (modeValue == -1)
+        cout << "\nMode: No mode (all numbers are unique)";
+    else
+        cout << "\nMode: " << modeValue;
+
+    return 0;
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*  2. Write a C++ program to read the contents of a “SampleData.txt” file. Create “Upper.txt” file to store uppercase characters,
+ “Lower.txt” file to store lowercase characters, “Digit.txt” file to store digits and “Other.txt” file to store remaining characters 
+ of a given file.[25 Marks]         */
+
+
+#include <iostream.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <fstream.h>
+#include <ctype.h>
+
+
+
+int main() {
+    char fname[20], ch;
+    ifstream fin;
+    ofstream fc, fu, fl, fd;
+
+    clrscr();  
+
+    cout << "\nEnter file name: ";
+    cin >> fname;
+
+    fin.open(fname, ios::in);
+    fc.open("other.txt", ios::out);
+    fu.open("upper.txt", ios::out);
+    fl.open("lower.txt", ios::out);
+    fd.open("digit.txt", ios::out);
+
+    if (!fin) {
+        cout << "File does not exist";
+        getch();
+        exit(1);
+    }
+
+    while (fin.get(ch)) { 
+        if (islower(ch))
+            fl.put(ch);
+        else if (isupper(ch))
+            fu.put(ch);
+        else if (isdigit(ch))
+            fd.put(ch);
+        else if ((ch > 31 && ch < 48) || (ch > 57 && ch < 65) || (ch > 122 && ch < 127))
+            fc.put(ch);
+    }
+
+    cout << "Task completed";
+    
+    fin.close();
+    fc.close();
+    fu.close();
+    fl.close();
+    fd.close();
+
+    getch();
+    return 0;
+}
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+
+
+<?php
+$vehicles = new SimpleXMLElement("<vehicles></vehicles>");
+
+// Add vehicle 1
+$v1 = $vehicles->addChild("vehicle");
+$v1->addAttribute("type", "Four Wheeler");
+$v1->addChild("name", "Maruti Suzuki");
+
+// Add vehicle 2
+$v2 = $vehicles->addChild("vehicle");
+$v2->addAttribute("type", "Four Wheeler");
+$v2->addChild("name", "Hyundai i20");
+
+// Add vehicle 3
+$v3 = $vehicles->addChild("vehicle");
+$v3->addAttribute("type", "Four Wheeler");
+$v3->addChild("name", "Tata Nexon");
+
+// Save to file
+file_put_contents("slip25_a.xml", $vehicles->asXML());
+
+echo "vehicle.xml file created successfully.";
+?>
+
+
+
+<?xml version="1.0"?>
+<vehicles>
+	<vehicle type="Four Wheeler">
+		<name>Maruti Suzuki</name>
+	</vehicle>
+	<vehicle type="Four Wheeler">
+		<name>Hyundai i20</name>
+	</vehicle>
+	<vehicle type="Four Wheeler">
+		<name>Tata Nexon</name>
+	</vehicle>
+</vehicles>
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */

@@ -1,0 +1,224 @@
+
+/* 1. Create a C++ class MyString with data member character pointer. Write a C++ program to accept and display a string. Overload operator to concatenate two 
+strings.[15 Marks]*/
+ 
+#include <iostream.h>
+#include <conio.h>
+#include <string.h>
+
+class MyString {
+private:
+    char str[100];  
+public:
+    MyString(const char *s = "") {
+        strcpy(str, s);
+    }
+
+    MyString operator+(MyString obj) {
+        MyString temp;
+        strcpy(temp.str, str);
+        strcat(temp.str, obj.str);
+        return temp;
+    }
+
+    void display() {
+        cout << str << endl;
+    }
+};
+
+void main() {
+    clrscr();    
+    char input1[50], input2[50];
+    cout << "Enter first string: ";
+    cin >> input1;
+    cout << "Enter second string: ";
+    cin >> input2;
+
+    MyString str1(input1), str2(input2);
+    
+
+    cout << "Concatenated String: ";
+    str3.display();
+
+    getch(); 
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*  2.Create a C++ class Complex Number with data members real and imaginary. Write necessary functions:
+i. To accept Complex Number using constructor.
+ii. To display Complex Number in format [x + iy].
+iii. To add two Complex Numbers by using friend function.[25 Marks]         */
+
+
+#include <iostream.h>
+#include <conio.h>
+class Complex {
+private:
+    float real, imag;
+public:
+    Complex(float r = 0, float i = 0) {
+        real = r;
+        imag = i;
+    }
+    friend Complex addComplex(Complex c1, Complex c2);
+
+    void display() {
+        cout << "[" << real;
+        if (imag >= 0)
+            cout << " + " <<"i"<< imag << "]";
+        else
+            cout << " - " <<"i"<< -imag << "]";
+        cout << endl;
+    }
+};
+
+Complex addComplex(Complex c1, Complex c2) {
+    return Complex(c1.real + c2.real, c1.imag + c2.imag);
+}
+
+void main() {
+    clrscr();
+
+    float r1, i1, r2, i2;
+    cout << "Enter real and imaginary part of first complex number: ";
+    cin >> r1 >> i1;
+    
+    cout << "Enter real and imaginary part of second complex number: ";
+    cin >> r2 >> i2;
+
+    Complex c1(r1, i1), c2(r2, i2);
+    Complex sum = addComplex(c1, c2);
+
+    cout << "First Complex Number: ";
+    c1.display();
+    
+    cout << "Second Complex Number: ";
+    c2.display();
+    
+    cout << "Sum of Complex Numbers: ";
+    sum.display();
+
+    getch();
+}
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<?xml version="1.0" ?>
+<?xml-stylesheet type="text/css"?>
+ <sportinfo>
+<sport code="B1">
+<sname>Cricket</sname>
+<captonname>Dhoni</captonname>
+</sport>
+<sport code="B2">
+<sname>Football</sname>
+<captonname>XYZ</captonname>
+</sport>
+</sportinfo>
+
+<html>
+<head>
+</head>
+<body>
+<?php
+$xml=simplexml_load_file('slip23_a.xml')or die("cannot die");
+?>
+<center>
+</b>Sport details</b>
+</center>
+<table border="1">
+<tr>
+<th>Sport code</th>
+<th>Sname</th>
+<th>Captonname </th>
+</tr>
+<?php
+foreach($xml->sport as $a)
+{
+ echo"<tr><td>".$a['code']."</td>";
+echo"<td>".$a->sname."</td>";
+echo"<td>".$a->captonname."</td></tr>";
+ }
+?>
+</table>     
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+CREATE DATABASE movie_db;
+
+USE movie_db;
+
+CREATE TABLE ACTOR (
+    ano INT PRIMARY KEY,
+    aname VARCHAR(50)
+);
+
+CREATE TABLE MOVIE (
+    mno INT PRIMARY KEY,
+    mname VARCHAR(100),
+    release_yr INT,
+    ano INT,
+    FOREIGN KEY (ano) REFERENCES ACTOR(ano)
+);
+
+-- Insert sample data
+INSERT INTO ACTOR VALUES (1, 'Shah Rukh Khan'), (2, 'Amitabh Bachchan');
+
+INSERT INTO MOVIE VALUES 
+(101, 'Dilwale Dulhania Le Jayenge', 1995, 1),
+(102, 'Chennai Express', 2013, 1),
+(201, 'Sholay', 1975, 2),
+(202, 'Piku', 2015, 2);
+
+
+
+
+<?php
+$conn = mysqli_connect("localhost", "root", "", "movie_db");
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+if (isset($_GET['ano']) && $_GET['ano'] != '') {
+    $ano = $_GET['ano'];
+    $sql = "SELECT mname, release_yr FROM MOVIE WHERE ano = $ano";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        echo "<h3>Movies:</h3><ul>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<li>" . $row['mname'] . " (" . $row['release_yr'] . ")</li>";
+        }
+        echo "</ul>";
+    } else {
+        echo "No movies found for this actor.";
+    }
+}
+mysqli_close($conn);
+?>
+

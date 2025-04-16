@@ -1,0 +1,261 @@
+
+/* Q 1:Write a C++ program to find volume of cylinder, cone and sphere. 
+(Use function overloading).[15 Marks]          */
+
+#include<iostream.h>
+#include<conio.h>
+
+float volume(float r,float h){
+ return 3.14*r*r*h;
+}
+
+float  volume(float r, float h, int){
+ return (1/3.0)*(3.14*r*r*h);
+}
+
+float volume (float r){
+ return (4/3)*(3.14*r*r*r);
+}
+
+int  main(){
+    float r,h;
+    cout <<"\n\nFor Cylinder :";
+    cout <<"\nEnter the radius : ";cin>>r;
+    cout <<"\nEnter the height : ";cin>>h;
+    cout<<"\nVolume of cylinder is : "<<volume(r,h);
+
+    cout<<"\n\nFor Cone :";
+    cout<<"\nEnter the radius : ";cin>>r;
+    cout<<"\nEnter the height : ";cin>>h;
+    cout<<"\nVolume of cone is : "<<volume(r,h,0);
+
+    cout<<"\n\nFor Sphere :";
+    cout<<"\nEnter the radius : ";cin>>r;
+    cout<<"\nVolume of sphere is :"<<volume(r);
+
+    return 0;
+}
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/* 2.Write a C++ program to create a class Movie with data members M Name, Release Year, Director 
+Name and Budget. (Use File Handling) Write necessary member functions to: 
+i. Accept details for ‘n’ Movies from user and store it in a file “Movie.txt . 
+ii.Display Movie details from a file. 
+iii. Count the number of objects stored in a file. [25 Marks] */
+
+#include <iostream.h>
+#include <conio.h>
+#include <fstream.h>
+
+class movie {
+public:
+    int year, budget;
+    char mname[50], dname[50];  // Use char arrays instead of string
+
+    void accept() {
+        cout << "\nEnter Movie Name: ";
+        cin.ignore();  // Ignore previous input buffer
+        cin.getline(mname, 50);
+
+        cout << "Enter Release Year: ";
+        cin >> year;
+        cin.ignore();
+
+        cout << "Enter Director Name: ";
+        cin.getline(dname, 50);
+
+        cout << "Enter Budget (in million): ";
+        cin >> budget;
+    }
+
+    void display() {
+        cout << "\nMovie Name: " << mname;
+        cout << "\nRelease Year: " << year;
+        cout << "\nDirector Name: " << dname;
+        cout << "\nBudget: " << budget << " million\n";
+    }
+};
+
+// Function to count total movies stored in the file
+int countMovies() {
+    ifstream file("movies.txt");
+    if (!file) return 0;
+
+    int count = 0;
+    char line[100];
+
+    while (file.getline(line, 100)) {
+        if (line[0] == '\0') continue;  // Ignore empty lines
+        count++;
+    }
+
+    file.close();
+    return count / 4;  // Each movie has 4 lines
+}
+
+void main() {
+    clrscr();  // Clear screen (Turbo C++ specific)
+
+    movie m;
+    int n;
+
+    cout << "\nEnter the number of movies: ";
+    cin >> n;
+    cin.ignore();  // Ignore newline after integer input
+
+    ofstream file("movies.txt");  // **Write in text mode**
+    if (!file) {
+        cout << "Error opening file!";
+        return;
+    }
+
+    for (int i = 0; i < n; i++) {
+        m.accept();
+        file << "Movie Name: " << m.mname << "\n";
+        file << "Release Year: " << m.year << "\n";
+        file << "Director Name: " << m.dname << "\n";
+        file << "Budget: " << m.budget << " million\n\n";
+    }
+
+    file.close();
+
+    // Read and display from file
+    ifstream readFile("movies.txt");
+    if (!readFile) {
+        cout << "Error reading file!";
+        return;
+    }
+
+    cout << "\n\nMovie Details from File:\n";
+    char line[100];
+    while (readFile.getline(line, 100)) {
+        cout << line << endl;
+    }
+
+    readFile.close();
+
+    // Count total movie objects stored
+    cout << "\nTotal Movies Stored: " << countMovies() << endl;
+
+    getch();  // Wait for user input
+}
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+<?php
+class Myclass
+{
+    public $a;
+    public $b = 305;
+    public $c = 'Akshay';
+
+    // Constructor function (old style - not recommended in PHP 7+)
+    function Myclass()
+    {
+        // Constructor code here (if needed)
+    }
+
+    function myfun1()
+    {
+        // Method 1
+    }
+
+    function myfun2()
+    {
+        // Method 2
+    }
+}
+
+// Display all declared class names
+$class = get_declared_classes();
+foreach ($class as $cname) {
+    echo "$cname<br>";
+}
+
+echo "<br>Class Methods are : <br>";
+$m = get_class_methods('Myclass');
+foreach ($m as $mname) {
+    echo "$mname<br>";
+}
+
+// Display all class variables and their default values
+$cp = get_class_vars('Myclass');
+echo "Class variables are :<br>";
+foreach ($cp as $cpname => $v) {
+    echo "$cpname : $v <br>";
+}
+?>
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*           */
+
+
+<?php
+// i) Create a DOM Document object and load the XML file
+$doc = new DOMDocument();
+$doc->load("slip2_b.xml");
+
+// ii) Output the content of the XML document to browser
+echo "<h3>XML Content:</h3>";
+echo "<pre>" . htmlentities($doc->saveXML()) . "</pre>";
+
+// iii) Save the same XML content as .doc file
+$doc->save("Student.doc");
+echo "<p>XML content saved as <b>Student.doc</b></p>";
+
+// iv) Print only student names from the XML
+echo "<h3>Student Names:</h3>";
+$students = $doc->getElementsByTagName("student");
+
+foreach ($students as $student) {
+    $name = $student->getElementsByTagName("name")->item(0)->nodeValue;
+    echo "Name: $name<br>";
+}
+?>
+
+
+------------
+
+<?xml version="1.0"?>
+<students>
+    <student>
+        <rollno>101</rollno>
+        <name>Bhagvat</name>
+        <address>Alandi</address>
+        <college>MIT ACSC</college>
+        <course>BCA</course>
+    </student>
+    <student>
+        <rollno>102</rollno>
+        <name>Amol</name>
+        <address>Parbhani</address>
+        <college>MIT ACSC</college>
+        <course>BSc</course>
+    </student>
+    <student>
+        <rollno>103</rollno>
+        <name>Sumit</name>
+        <address>Pune</address>
+        <college>MIT ACSC</college>
+        <course>BCA</course>
+    </student>
+</students>

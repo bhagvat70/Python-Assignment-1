@@ -1,0 +1,298 @@
+
+/*  1 . Create a C++ class MyArray, which contains single dimensional integer array of a given size. Write a member function to display sum of given array elements. 
+(Use Dynamic Constructor and Destructor)[15 Marks] */
+
+
+#include<iostream>
+using namespace std;
+
+class Myarray{
+	private:
+		int *arr;
+		int size;
+	public:
+		Myarray(int s){
+			size=s;
+			arr=new int[size];
+			cout<<"\nEnter " <<size <<"elements :";
+			for(int i=0;i<size;i++){
+				cin>>arr[i];
+			}
+		}
+		
+		display(){
+			int sum=0;
+			for(int i=0;i<size;i++){
+				sum=sum+arr[i];
+			}
+			cout<<"\nSum of array elements : "<<sum<<endl;
+		}
+		
+		~Myarray(){
+			delete[] arr;
+			cout<<"\nMemory dealocated successfully..!";
+		}
+};
+
+int main(){
+	int n;
+	cout<<"\nEnter the size of array : ";
+	cin>>n;
+	
+	Myarray ob(n);
+	ob.display();
+	return 0;
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*   2 . Create a base class Student with data members Roll No, Name. Derives two classes from it, class Theory with data members Ml, M2, M3, M4 and class Practical
+ with data members P1, P2. Class Result(Total Marks, Percentage, Grade) inherits both Theory and Practical classes.(Use concept of Virtual Base Class and protected 
+ access specifiers) Write a C++ menu driven program to perform the following functions:
+i. Accept Student Information
+ii. Display Student Information
+iii. Calculate Total marks, Percentage and Grade.[25 Marks]        */
+
+
+#include <iostream.h>
+#include <conio.h>
+
+class Student {
+protected:
+    int rollNo;
+    char name[50];
+
+public:
+    void acceptStudent() {
+        cout << "Enter Roll No: ";
+        cin >> rollNo;
+        cout << "Enter Name: ";
+        cin >> name;
+    }
+
+    void displayStudent() {
+        cout << "\nRoll No: " << rollNo;
+        cout << "\nName: " << name;
+    }
+};
+
+class Theory : virtual public Student {
+protected:
+    int M1, M2, M3, M4;
+
+public:
+    void acceptTheory() {
+        cout << "Enter Marks for M1, M2, M3, M4: ";
+        cin >> M1 >> M2 >> M3 >> M4;
+    }
+};
+
+class Practical : virtual public Student {
+protected:
+    int P1, P2;
+
+public:
+    void acceptPractical() {
+        cout << "Enter Marks for P1, P2: ";
+        cin >> P1 >> P2;
+    }
+};
+
+class Result : public Theory, public Practical {
+private:
+    int totalMarks;
+    float percentage;
+    char grade;
+
+public:
+    void calculateResult() {
+        totalMarks = M1 + M2 + M3 + M4 + P1 + P2;
+        percentage = totalMarks / 6.0;
+
+        if (percentage >= 75)
+            grade = 'A';
+        else if (percentage >= 60)
+            grade = 'B';
+        else if (percentage >= 50)
+            grade = 'C';
+        else if (percentage >= 35)
+            grade = 'D';
+        else
+            grade = 'F';
+    }
+
+    void displayResult() {
+        displayStudent();
+        cout << "\nTotal Marks: " << totalMarks;
+        cout << "\nPercentage: " << percentage << "%";
+        cout << "\nGrade: " << grade << "\n";
+    }
+};
+
+void main() {
+    clrscr();
+    Result student;
+    int choice;
+
+    do {
+        cout << "\n1. Accept Student Information";
+        cout << "\n2. Display Student Information";
+        cout << "\n3. Calculate and Display Result";
+        cout << "\n4. Exit";
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            student.acceptStudent();
+            student.acceptTheory();
+            student.acceptPractical();
+            break;
+        case 2:
+            student.displayStudent();
+            break;
+        case 3:
+            student.calculateResult();
+            student.displayResult();
+            break;
+        case 4:
+            cout << "Exiting...";
+            break;
+        default:
+            cout << "Invalid choice! Try again.";
+        }
+    } while (choice != 4);
+
+    getch();
+}
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+<?php
+// Circle class with short names
+class C {
+    public $r;
+
+    public function __construct($r) {
+        $this->r = $r;
+    }
+
+    public function area() {
+        return 3.14 * $this->r * $this->r;
+    }
+
+    public function circ() {
+        return 2 * 3.14 * $this->r;
+    }
+}
+
+// Handle form
+$a = $c = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $r = $_POST["r"];
+    $o = $_POST["o"];
+
+    if (is_numeric($r) && $r > 0) {
+        $obj = new C($r);
+
+        if ($o == "a") {
+            $a = $obj->area();
+        } elseif ($o == "c") {
+            $c = $obj->circ();
+        } elseif ($o == "b") {
+            $a = $obj->area();
+            $c = $obj->circ();
+        }
+    } else {
+        echo "<p style='color:red;'>Enter valid number!</p>";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Circle Calc</title>
+</head>
+<body>
+    <h2>Circle Calc</h2>
+    <form method="post">
+        Radius: <input type="text" name="r" required><br><br>
+        Choose:<br>
+        <input type="radio" name="o" value="a" required> Area<br>
+        <input type="radio" name="o" value="c"> Circumference<br>
+        <input type="radio" name="o" value="b"> Both<br><br>
+        <input type="submit" value="Go"><br><br>
+    </form>
+
+    <?php
+    if ($a != "") {
+        echo "<p>Area = " . round($a, 2) . "</p>";
+    }
+    if ($c != "") {
+        echo "<p>Circumference = " . round($c, 2) . "</p>";
+    }
+    ?>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+<html>
+<head>
+<script language="javascript">
+var req=false;
+if(window.XMLHttpRequest)
+{
+req=new XMLHttpRequest();
+}
+else if(window.ActiveXObject)
+{
+req=new ActiveXObject("Microsoft.XMLHttp");
+}
+function fetchdata(datasource,divID)
+{
+if(req)
+{
+req.open("GET",datasource);
+req.onreadystatechange=function()
+{
+if(req.readyState==4 && req.status==200)
+{
+document.getElementById(divID).innerHTML=req.responseText;
+}
+}
+req.send(null);
+}
+}
+</script>
+</head>
+<body>
+<form>
+<input type=button value="Fetch Message" onClick="fetchdata('myfile.txt','myDiv')">
+</form>
+<div id="myDiv">data will be here
+</body>
+</div>
+</html>

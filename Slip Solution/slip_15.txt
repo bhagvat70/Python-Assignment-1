@@ -1,0 +1,235 @@
+
+/*  1.Create a C++ class Fraction with data members Numerator and Denominator. Write a C++ program to calculate and display sum of two fractions.
+ (Use Constructor) [15 Marks] */
+
+#include <iostream.h>
+#include <conio.h>
+
+class Fraction {
+    int num, den; // Numerator & Denominator
+
+public:
+    // Constructor to initialize fraction
+    Fraction(int n, int d) {
+        num = n;
+        den = d;
+    }
+
+    // Function to add two fractions
+    Fraction add(Fraction f) {
+        int new_num = (num * f.den) + (f.num * den); // Cross multiply
+        int new_den = den * f.den; // Multiply denominators
+        return Fraction(new_num, new_den);
+    }
+
+    // Function to display fraction
+    void display() {
+        cout << num << "/" << den;
+    }
+};
+
+int main() {
+    clrscr();
+    
+    // Creating fraction objects
+    Fraction f1(1, 2), f2(1, 3); // 1/2 and 1/3
+
+    cout << "First Fraction: ";
+    f1.display();
+
+    cout << "\nSecond Fraction: ";
+    f2.display();
+
+    // Add fractions
+    Fraction sum = f1.add(f2);
+
+    cout << "\nSum of Fractions: ";
+    sum.display();
+
+    getch();
+    return 0;
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*   2.Write a C++ class Seller (S_Name, Product_name, Sales_Quantity, Target_Quantity, Month, Commission). Each salesman deals with a separate 
+product and is assigned a target for a month. At the end of the month his monthly sales is compared with target and commission is calculated as 
+follows: i. If Sales_Quantity>Target Quantity then commission is 25% of extra sales made + 10% of target.
+		ii.If Sales_Quantity = Target Quantity then commission is 10% of target.
+		iii. Otherwise commission is zero.      
+Display salesman information along with commission obtained. (Use array of objects)[25 Marks]        */
+
+#include <iostream.h>
+#include <conio.h>
+
+class Seller {
+    char S_Name[50], Product_name[50], Month[20];
+    int Sales_Quantity, Target_Quantity;
+    float Commission;
+
+public:
+    void accept() {
+        cout << "\nEnter Seller Name: ";
+        cin >> S_Name;
+        cout << "Enter Product Name: ";
+        cin >> Product_name;
+        cout << "Enter Month: ";
+        cin >> Month;
+        cout << "Enter Sales Quantity: ";
+        cin >> Sales_Quantity;
+        cout << "Enter Target Quantity: ";
+        cin >> Target_Quantity;
+    }
+
+    void calculateCommission() {
+        if (Sales_Quantity > Target_Quantity) {
+            Commission = (0.25 * (Sales_Quantity - Target_Quantity)) + (0.10 * Target_Quantity);
+        } 
+        else if (Sales_Quantity == Target_Quantity) {
+            Commission = 0.10 * Target_Quantity;
+        } 
+        else {
+            Commission = 0;
+        }
+    }
+
+    void display() {
+        cout << "\nSeller: " << S_Name;
+        cout << "\nProduct: " << Product_name;
+        cout << "\nMonth: " << Month;
+        cout << "\nSales Quantity: " << Sales_Quantity;
+        cout << "\nTarget Quantity: " << Target_Quantity;
+        cout << "\nCommission: " << Commission;
+        cout << "\n-----------------------------";
+    }
+};
+
+int main() {
+    clrscr();   // Clear screen (Turbo C++ specific)
+
+    int n;
+    cout << "Enter number of sellers: ";
+    cin >> n;
+
+    Seller sellers[10];  // Array of objects (Max 10 sellers)
+    
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details for Seller " << i + 1 << ":\n";
+        sellers[i].accept();
+        sellers[i].calculateCommission();
+    }
+
+    cout << "\nSeller Details and Commissions:\n";
+    for (int i = 0; i < n; i++) {
+        sellers[i].display();
+    }
+
+    getch();   // Wait for key press (Turbo C++ specific)
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<!DOCTYPE html>
+<html>
+<body>
+<form method="post" action="">
+    <select name="subjects[]" multiple>
+        <option value="PHP"    <?php if(isset($_POST['subjects']) && in_array("PHP", $_POST['subjects'])) echo "selected"; ?>>PHP</option>
+        <option value="C"      <?php if(isset($_POST['subjects']) && in_array("C", $_POST['subjects'])) echo "selected"; ?>>C</option>
+        <option value="Java"   <?php if(isset($_POST['subjects']) && in_array("Java", $_POST['subjects'])) echo "selected"; ?>>Java</option>
+        <option value="Python" <?php if(isset($_POST['subjects']) && in_array("Python", $_POST['subjects'])) echo "selected"; ?>>Python</option>
+    </select><br><br>
+    <input type="submit" name="submit" value="Show">
+</form>
+
+<?php
+if (isset($_POST['submit']) && isset($_POST['subjects'])) {
+    echo "<h3>Selected Subjects Info:</h3>";
+    foreach ($_POST['subjects'] as $sub) {
+        echo "$sub: ";
+        if ($sub == "PHP") echo "Web scripting language.<br>";
+        if ($sub == "C") echo "General-purpose language.<br>";
+        if ($sub == "Java") echo "Object-oriented language.<br>";
+        if ($sub == "Python") echo "Easy and powerful language.<br>";
+    }
+}
+?>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>City Hint</title>
+    <script>
+        function showHint(str) {
+            if (str.length == 0) {
+                document.getElementById("hint").innerHTML = "";
+                return;
+            }
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("hint").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "slip15_b.php?q=" + str, true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <h3>Type a City Name:</h3>
+    <input type="text" onkeyup="showHint(this.value)">
+    <p>Suggestions: <span id="hint"></span></p>
+</body>
+</html>
+
+
+
+<?php
+$cities = array("Pune", "Parbhani", "Mumbai", "Nagpur", "Nashik", "Delhi", "Chennai", "Kolkata", "Bangalore", "Hyderabad");
+
+$q = $_GET['q'];
+$hint = "";
+
+if ($q !== "") {
+    $q = strtolower($q);  
+    foreach ($cities as $city) {
+        
+        if (substr(strtolower($city), 0, strlen($q)) === $q) {
+            $hint .= $city . "<br>";
+        }
+    }
+}
+
+echo $hint === "" ? "No suggestions" : $hint;
+?>

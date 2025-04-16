@@ -1,0 +1,209 @@
+/* 1.Write a C++ program to create a class Machine with data members Machine Id, Machine Name, Price. Create and initialize all values of Machine 
+object by using parameterized constructor and copy constructor. Display details of Machine using setw( ) and setprecision( ).[15 Marks]     */
+
+#include <iostream.h>
+#include <iomanip.h>
+#include <string.h>
+#include <conio.h>
+
+class Machine {
+    int m_id;
+    char m_name[50];
+    float price;
+
+public:
+    Machine(int id, char name[], float p) {
+        m_id = id;
+        strcpy(m_name, name);
+        price = p;
+    }
+
+    Machine(const Machine &m) {
+        m_id = m.m_id;
+        strcpy(m_name, m.m_name);
+        price = m.price;
+    }
+
+    void display() {
+	cout << setw(10) << "ID" << setw(15) << "Name" << setw(10) << "Price" << endl;
+	cout << setw(10) << m_id << setw(15) << m_name << setw(10) << setprecision(2) << price << endl;
+    }
+};
+
+int main() {
+    clrscr();
+
+    char name[] = "Lathe";  // Fix string literal issue
+    Machine m1(101, name, 155.753);
+    Machine m2 = m1;
+
+    cout << "\nMachine Details:\n";
+    m1.display();
+
+    cout << "\nCopied Machine Details:\n";
+    m2.display();
+
+    getch();
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*  2.Create a class Matrix Write necessary member functions for the following:
+i. To accept a Matrix
+ii. To display a Matrix
+iii. Overload unary ‘-‘ operator to calculate transpose of a Matrix.
+iv. Overload unary '++' operator to increment matrix elements by 1[25 Marks]        */
+
+
+#include <iostream.h>
+#include <conio.h>
+
+class Matrix {
+    int mat[3][3]; // Fixed 3x3 matrix for simplicity
+
+public:
+    void accept() {
+        cout << "Enter 3x3 Matrix Elements:\n";
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                cin >> mat[i][j];
+            }
+        }
+    }
+
+    void display() {
+        cout << "Matrix:\n";
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                cout << mat[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    // Overload Unary '-' operator for Transpose
+    Matrix operator-() {
+        Matrix temp;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                temp.mat[i][j] = mat[j][i]; // Swap row & column
+            }
+        }
+        return temp;
+    }
+
+    // Overload Unary '++' Operator to Increment Elements by 1
+    void operator++() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                mat[i][j]++; // Increment each element
+            }
+        }
+    }
+};
+
+int main() {
+    clrscr();
+    Matrix M1, M2;
+
+    M1.accept();
+    cout << "\nOriginal ";
+    M1.display();
+
+    // Transpose first
+    M2 = -M1;
+    cout << "\nAfter Transpose ";
+    M2.display();
+
+    // Increment the transposed matrix
+    ++M2;
+    cout << "\nAfter Incrementing by 1 ";
+    M2.display();
+
+    getch();
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post">
+    First String: 
+    <input type="text" name="s1" value="<?php if(isset($_POST['s1'])) echo $_POST['s1']; ?>"><br><br>
+    
+    Second String: 
+    <input type="text" name="s2" value="<?php if(isset($_POST['s2'])) echo $_POST['s2']; ?>"><br><br>
+    
+    <input type="submit" name="submit" value="Check Match">
+</form>
+
+<?php
+if (isset($_POST['submit'])) {
+    $s1 = $_POST['s1'];
+    $s2 = $_POST['s2'];
+
+    if ($s1 == $s2) {
+        echo "<b>Strings Match</b>";
+    } else {
+        echo "<b>Strings Do Not Match</b>";
+    }
+}
+?>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<?php
+$name = $_GET['name'];
+
+if ($name == "")
+    echo "Enter username";
+elseif (strlen($name) < 3)
+    echo "Username is too short";
+else
+    echo "Valid username";
+?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function checkName(str) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("msg").innerHTML = this.responseText;
+  }
+  xhttp.open("GET", "slip16_b.php?name=" + str, true);
+  xhttp.send();
+}
+</script>
+</head>
+<body>
+Enter Username: <input type="text" onkeyup="checkName(this.value)">
+<p id="msg"></p>
+</body>
+</html>

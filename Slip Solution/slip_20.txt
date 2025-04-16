@@ -1,0 +1,248 @@
+/*  1.Create a C++ class Number with integer data member. Write necessary member functions to overload the operator unary pre and post 
+increment ‘++’[15 Marks]  */
+
+#include <iostream.h>
+#include <conio.h>
+
+class Number {
+private:
+    int value;
+
+public:
+    Number(int v = 0) {
+        value = v;
+    }
+
+    void display() {
+        cout << "Value: " << value << endl;
+    }
+
+    // Pre-increment ( ++x )
+    Number operator++() {
+        ++value;
+        return *this;
+    }
+
+    // Post-increment ( x++ )
+    Number operator++(int) {
+        Number temp = *this;
+        value++;
+        return temp;
+    }
+};
+
+void main() {
+    clrscr();
+
+    Number num(5);
+
+    cout << "Original value: ";
+    num.display();
+
+    cout << "After Pre-Increment: ";
+    (++num).display();
+
+    cout << "After Post-Increment: ";
+    (num++).display();
+
+    cout << "Final Value after Post-Increment: ";
+    num.display();
+
+    getch();
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* 2. Create a C++ class for inventory of Mobiles with data members Model, Mobile Company, Color, Price and Quantity. Mobile 
+can be sold, if stock is available,
+ otherwise purchase will be made. Write necessary member functions for the following:
+i.To accept mobile details from user.
+ii. To sale a mobile. (Sale contains Mobile details & number of mobiles to be sold.)
+iii. To Purchase a Mobile. (Purchase contains Mobile details & number of mobiles to be purchased)[25 Marks]          */
+
+#include <iostream.h>
+#include <conio.h>
+#include <string.h>
+
+class MobileInventory {
+private:
+    char model[20], company[20], color[20];
+    float price;
+    int quantity;
+
+public:
+    void acceptDetails() {
+	cout << "Enter Model: ";
+	cin >> model;
+	cout << "Enter Company: ";
+	cin >> company;
+	cout << "Enter Color: ";
+	cin >> color;
+	cout << "Enter Price: ";
+	cin >> price;
+	cout << "Enter Quantity: ";
+	cin >> quantity;
+    }
+
+    void sellMobile(int num) {
+	if (num > quantity) {
+	    cout << "\nNot enough stock!\n";
+	} else {
+	    quantity -= num;
+	    cout << "\nSold " << num << " mobile(s)!\n";
+	}
+    }
+
+    void purchaseMobile(int num) {
+	quantity += num;
+	cout << "\nAdded " << num << " mobile(s) to stock!\n";
+    }
+
+    void displayDetails() {
+	cout << "\nModel: " << model << ", Company: " << company << ", Color: " << color;
+	cout << "\nPrice: Rs." << price << ", Stock: " << quantity << "\n";
+    }
+};
+
+void main() {
+    clrscr();
+    MobileInventory mobile;
+    int choice, num;
+
+    mobile.acceptDetails();
+
+    do {
+	cout << "\n1. Sell Mobile  2. Purchase Mobile  3. Display Details  4. Exit\nChoice: ";
+	cin >> choice;
+
+	switch (choice) {
+	    case 1:
+		cout << "Enter quantity to sell: ";
+		cin >> num;
+		mobile.sellMobile(num);
+		break;
+	    case 2:
+		cout << "Enter quantity to purchase: ";
+		cin >> num;
+		mobile.purchaseMobile(num);
+		break;
+	    case 3:
+		mobile.displayDetails();
+		break;
+	    case 4:
+		cout << "Exiting...\n";
+		break;
+	    default:
+		cout << "Invalid choice! Try again.\n";
+	}
+    } while (choice != 4);
+
+    getch();
+}
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<?xml version="1.0"?>
+<VenusCDStore>
+    <Classical>
+        <Movie>
+            <MovieName>Mughal-e-Azam</MovieName>
+            <ReleaseYear>1960</ReleaseYear>
+            <ActorName>Dilip Kumar</ActorName>
+        </Movie>
+        <Movie>
+            <MovieName>Guide</MovieName>
+            <ReleaseYear>1965</ReleaseYear>
+            <ActorName>Dev Anand</ActorName>
+        </Movie>
+    </Classical>
+
+    <Action>
+        <Movie>
+            <MovieName>Sholay</MovieName>
+            <ReleaseYear>1975</ReleaseYear>
+            <ActorName>Amitabh Bachchan</ActorName>
+        </Movie>
+        <Movie>
+            <MovieName>War</MovieName>
+            <ReleaseYear>2019</ReleaseYear>
+            <ActorName>Hrithik Roshan</ActorName>
+        </Movie>
+    </Action>
+
+    <Horror>
+        <Movie>
+            <MovieName>Raaz</MovieName>
+            <ReleaseYear>2002</ReleaseYear>
+            <ActorName>Bipasha Basu</ActorName>
+        </Movie>
+        <Movie>
+            <MovieName>Stree</MovieName>
+            <ReleaseYear>2018</ReleaseYear>
+            <ActorName>Rajkummar Rao</ActorName>
+        </Movie>
+    </Horror>
+</VenusCDStore>
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fibonacci and Digit Sum</title>
+</head>
+<body>
+
+<h2>Enter a Number</h2>
+
+<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <input type="number" name="num" required>
+    <input type="submit" value="Submit">
+</form>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $n = $_POST['num'];
+
+    // 1) Fibonacci Series
+    echo "<h3>Fibonacci Series (first $n terms):</h3>";
+    $f1 = 0;
+    $f2 = 1;
+    echo "$f1, $f2";
+    for ($i = 3; $i <= $n; $i++) {
+        $f3 = $f1 + $f2;
+        echo ", $f3";
+        $f1 = $f2;
+        $f2 = $f3;
+    }
+
+    // 2) Sum of digits
+    $temp = $n;
+    $sum = 0;
+    while ($temp > 0) {
+        $digit = $temp % 10;
+        $sum += $digit;
+        $temp = (int)($temp / 10);
+    }
+
+    echo "<h3>Sum of digits of $n is: $sum</h3>";
+}
+?>
+
+</body>
+</html>

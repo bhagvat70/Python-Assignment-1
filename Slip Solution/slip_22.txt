@@ -1,0 +1,152 @@
+
+
+/* 1. Write a C++ program to define two function templates for calculating the square and cube of given numbers with different data types.[15 Marks]          */1. Write a C++ program to define two function templates for calculating the square and cube of given numbers with different data types.[15 Marks]
+
+#include <iostream.h>
+#include <conio.h>
+
+template <class T>
+T square(T num) {
+    return num * num;
+}
+
+template <class T>
+T cube(T num) {
+    return num * num * num;
+}
+
+void main() {
+    clrscr();
+
+    int intNum;
+    float floatNum;
+
+    cout << "Enter an integer: ";
+    cin >> intNum;
+    cout << "Square: " << square(intNum) << endl;
+    cout << "Cube: " << cube(intNum) << endl;
+
+    cout << "Enter a float number: ";
+    cin >> floatNum;
+    cout << "Square: " << square(floatNum) << endl;
+    cout << "Cube: " << cube(floatNum) << endl;
+
+    getch();
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* 2.Write a C++ program to overload ‘display_str’ function as follows:
+i. void display_str(char * ) – Display a string in double quotes.
+ii. void display_str (int n, char * )- Display first n characters from a given string.
+iii. void display_str (int m, int n,char * )- Display substring of a given string from position m to n.[25 Marks]          */
+
+#include <iostream.h>
+#include <conio.h>
+#include <string.h>
+
+void display_str(char *str) {
+    cout << "\"" << str << "\"" << endl;
+}
+
+void display_str(int n, char *str) {
+    for (int i = 0; i < n && str[i] != '\0'; i++)
+        cout << str[i];
+    cout << endl;
+}
+
+void display_str(int m, int n, char *str) {
+    for (int i = m; i <= n && str[i] != '\0'; i++)
+        cout << str[i];
+    cout << endl;
+}
+
+void main() {
+    clrscr();
+
+    char str[100];
+    int n, m;
+
+    cout << "Enter a string: ";
+    cin >> str;
+
+    cout << "String in double quotes: ";
+    display_str(str);
+
+    cout << "Enter number of characters to display: ";
+    cin >> n;
+    cout << "First " << n << " characters: ";
+    display_str(n, str);
+
+    cout << "Enter start and end positions for substring: ";
+    cin >> m >> n;
+    cout << "Substring from position " << m << " to " << n << ": ";
+    display_str(m, n, str);
+
+    getch();
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+
+<?php
+$xml=simplexml_load_file("slip22_a.xml") or die("cannnot load");
+$xmlstring=$xml->asXML();
+echo $xmlstring;
+?>
+
+
+<bookstore name="Pragati Bookstore">
+<category name="Yoga">
+<book>
+<title>Yoga for Beginners</title>
+<author>B.K.S Iyengar</author>
+<price>250</price>
+</book>
+<book>
+<title>Daily Yoga Practice</title>
+<author>Ramdev</author>
+<price>200</price>
+</book>
+</category>
+<category name="Story">
+<book>
+<title>The Jungle Book</title>
+<author>Rudyard Kipling</author>
+<price>150</price>
+</book>
+<book>
+<title>Panchatantra Tales</title>
+<author>Vishnu Sharma</author>
+<price>180</price>
+</book>
+</category>
+<category name="Technical">
+<book>
+<title>Learning PHP</title>
+<author>David Sklar</author>
+<price>350</price>
+</book>
+<book>
+<title>Computer Networks</title>
+<author>Andrew S. Tanenbaum</author>
+<price>400</price>
+</book>
+</category>
+</bookstore>
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */

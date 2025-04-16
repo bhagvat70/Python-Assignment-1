@@ -1,0 +1,304 @@
+
+
+
+/*   1.Consider the following C++ class
+class Point
+{
+int x,y;
+public:
+void setpoint(int,int); //set values of x and y co-ordinates
+void showpoint(); // display co-ordinate in point p in format(x,y)
+}[15 Marks]        */
+
+#include<iostrea.h>
+#include<conio.h>
+#include<stdlib.h>
+ 
+class point
+{
+    int x,y;
+        public:
+            void setpoint(int a,int b)
+            {
+            x=a;
+            y=b;
+            }
+ 
+            void showpoint()
+            {
+            cout<<"("<<x<<","<<y<<")";
+            }
+};
+ 
+int main(){
+	int a,b;
+	
+	point p;
+	 
+	cout<<"\nEnter Co-Ordinates : ";
+	cout<<"\nEnter X : ";
+	cin>>a;
+	cout<<"Enter Y : ";
+	cin>>b;
+	p.setpoint(a,b);
+	p.showpoint();
+	
+	return 0;
+}
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/* 2.Create a C++ base class Shape. Derive three different classes Circle,Sphere and Cylinder from shape class. Write a C++ program to calculate area of Circle, Sphere and Cylinder.
+(Use pure virtual function). [25 Marks]   */
+
+#include<iostream.h>
+#include<conio.h> 
+class shape
+{
+    public:
+        virtual void area()=0;
+};
+ 
+class circle:public shape
+{
+    float r;
+    public:
+        void area()
+        {
+        cout<<"Enter Radius of Circle : " ;
+        cin>>r;
+        cout<<"Area of circle is : "<<(3.14*r*r);
+        }
+};
+ 
+class sphere:public shape
+{
+    float r;
+    public:
+        void area()
+        {
+        cout<<"\nEnter Radius of Sphere : ";
+        cin>>r;
+        cout<<"Area of Sphere is : "<<(4*3.14*r*r);
+        }
+};
+ 
+class cylinder:public shape
+{
+    float r,h;
+    public:
+        void area()
+        {
+        cout<<"\nEnter Radius of Cylinder : ";
+        cin>>r;
+        cout<<"Enter Height of Cylinder : ";
+        cin>>h;
+        cout<<"\nArea of Cylinder is : "<<(2*3.14*r*h + 2*3.14*r*r);
+        }
+};
+ 
+int main()
+{
+clrscr();
+circle c;
+c.area();
+cout<<endl;
+ 
+sphere s;
+s.area();
+cout<<endl;
+ 
+cylinder cyli;
+cyli.area();
+cout<<endl;
+return 0;
+}
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*           */
+
+
+<?php
+define('pi', 3.14);
+
+// Abstract class
+abstract class shape {
+  abstract function calc_area($r, $h);
+  abstract function calc_vol($r, $h);
+}
+
+// Circle class
+class circle extends shape {
+  function calc_area($r, $h) {
+    return pi * $r * $r;
+  }
+  function calc_vol($r, $h) {
+    return 0; // not applicable
+  }
+}
+
+// Cylinder class
+class cylinder extends shape {
+  function calc_area($r, $h) {
+    return 2 * pi * $r * ($r + $h);
+  }
+  function calc_vol($r, $h) {
+    return pi * $r * $r * $h;
+  }
+}
+
+// Rectangle class
+class rectangle extends shape {
+  function calc_area($r, $h) {
+    return $r * $h;
+  }
+  function calc_vol($r, $h) {
+    return 0; // not applicable
+  }
+}
+
+// If values are entered
+if (isset($_GET['r']) && isset($_GET['h'])) {
+  $r = $_GET['r'];
+  $h = $_GET['h'];
+
+  $rect = new rectangle();
+  echo "Area of Rectangle: " . $rect->calc_area($r, $h) . "<br>";
+
+  $cyl = new cylinder();
+  echo "Area of Cylinder: " . $cyl->calc_area($r, $h) . "<br>";
+  echo "Volume of Cylinder: " . $cyl->calc_vol($r, $h) . "<br>";
+
+  $cir = new circle();
+  echo "Area of Circle: " . $cir->calc_area($r, $h) . "<br>";
+}
+?>
+
+
+<html>
+<body>
+<form action="slip5_a.php" method="get">
+  <center>
+    <h2>Enter values for Cone & Cylinder</h2>
+    <p>Enter Radius: <input type="text" name="r"><br></p>
+    <p>Enter Height: <input type="text" name="h"><br></p>
+    <input type="submit" value="Calculate">
+  </center>
+</form>
+</body>
+</html>
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+/*           */
+
+<?php
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "sybbaca"; 
+
+$conn = mysqli_connect($host, $user, $pass, $db);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+if (isset($_GET['standard'])) {
+    $std = $_GET['standard'];
+    $query = "SELECT * FROM student WHERE standard='$std'";
+    $result = mysqli_query($conn, $query);
+
+    echo "<table border='1'>
+            <tr><th>SNo</th><th>Name</th><th>Standard</th><th>Marks</th><th>Percentage</th></tr>";
+    
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>
+                <td>{$row['sno']}</td>
+                <td>{$row['sname']}</td>
+                <td>{$row['standard']}</td>
+                <td>{$row['marks']}</td>
+                <td>{$row['per']}</td>
+              </tr>";
+    }
+    echo "</table>";
+}
+
+mysqli_close($conn);
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <script>
+        function fetchDetails() {
+            var std = document.getElementById("std").value;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "slip5_b.php?standard=" + std, true);
+            xhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <h2>Select Standard:</h2>
+    <select id="std" onchange="fetchDetails()">
+        <option value="">--Select--</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+    </select>
+
+    <h3>Student Details:</h3>
+    <div id="result"></div>
+</body>
+</html>
+
+---------
+CREATE DATABASE sybbaca;
+
+USE sybbaca;
+
+
+CREATE TABLE student (
+    sno INT AUTO_INCREMENT PRIMARY KEY,
+    sname VARCHAR(100),
+    standard VARCHAR(10),
+    marks INT,
+    per FLOAT
+);
+
+
+INSERT INTO student (sname, standard, marks, per) VALUES
+('Bhagvat Shinde', '9', 450, 90.00),
+('Amol Patil', '9', 400, 80.00),
+('Sumit Kale', '10', 420, 84.00),
+('Neha Joshi', '10', 460, 92.00);
+
+

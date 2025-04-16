@@ -1,0 +1,211 @@
+
+/*   1.Write a C++ program to accept radius of a Circle. Calculate and display diameter, circumference as well as area of a Circle. 
+(Use Inline function)[15 Marks]        */
+#include <iostream.h>
+#include <conio.h>
+
+const float PI = 3.14159;
+
+class Circle {
+    float radius;
+
+public:
+    void accept() {
+        cout << "Enter radius of the circle: ";
+        cin >> radius;
+    }
+
+    inline float diameter() {
+        return 2 * radius;
+    }
+
+    inline float circumference() {
+        return 2 * PI * radius;
+    }
+
+    inline float area() {
+        return PI * radius * radius;
+    }
+
+    void display() {
+        cout << "\nDiameter: " << diameter();
+        cout << "\nCircumference: " << circumference();
+        cout << "\nArea: " << area();
+    }
+};
+
+int main() {
+    clrscr();  // Clear screen (Turbo C++ specific)
+
+    Circle c;
+    c.accept();  // Accept radius
+    c.display(); // Display results
+
+    getch();  // Wait for key press (Turbo C++ specific)
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*     2 .Create a C++ class MyString with data members a character pointer and str length. (Use new and delete operator).
+Write a C++ program using operator overloading to perform following operation:
+i.    !   To reverse the case of each alphabet from a given string.
+ii.   <  To compare length of two strings.
+iii.  +  To add constant ‘n’ to each alphabet of a string.[25 Marks]      */
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reverse String</title>
+</head>
+<body>
+
+<h2>Enter a String to Reverse</h2>
+
+<form method="post" action="">
+    <label>Enter String:</label>
+    <input type="text" name="inputString" required>
+    <input type="submit" value="Reverse">
+</form>
+
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $str = $_POST['inputString'];
+    $reversed = strrev($str);
+    echo "<h3>Reversed String: $reversed</h3>";
+}
+?>
+
+</body>
+</html>
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+CREATE DATABASE sybbaca;
+
+USE sybbaca;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL  -- You can store plain or hashed passwords here
+);
+
+INSERT INTO users (username, password) VALUES
+('Bhagvat', '1234'),
+('Amol', 'abcd'),
+('Sumit', 'pass123');
+
+
+----------------------------
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Check</title>
+    <script>
+        function checkLogin() {
+            var uname = document.getElementById("uname").value;
+            var pass = document.getElementById("pass").value;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("POST", "slip14_b.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("uname=" + uname + "&pass=" + pass);
+        }
+    </script>
+</head>
+<body>
+
+<h2>User Login</h2>
+Username: <input type="text" id="uname"><br><br>
+Password: <input type="password" id="pass"><br><br>
+<button onclick="checkLogin()">Login</button>
+
+<div id="result" style="margin-top:20px; color:blue;"></div>
+
+</body>
+</html>
+
+
+<?php
+$con = mysqli_connect("localhost", "root", "", "sybbaca");
+
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$username = $_POST['uname'];
+$password = $_POST['pass'];
+
+$sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+$result = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    echo " Valid Username and Password.";
+} else {
+    echo " Invalid Username or Password.";
+}
+
+mysqli_close($con);
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

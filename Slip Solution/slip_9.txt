@@ -1,0 +1,295 @@
+
+/*   1.Consider the following C++ class class Person { char Name [20]; charAddr [30]; float Salary; float tax amount; public: // member functions };
+Calculate tax amount by checking salary of a person
+For salary <=20000 tax rate=0
+For salary>20000|| <=40000 tax rate =5% of salary.
+For salary>40000 tax rate=10% of salary[15 Marks]        */
+
+
+#include<iostream>
+#include<conio.h>
+ using namespace std;
+class person
+{
+    char name[20];
+    char addr[20];
+    float sal,tax;
+    public:
+        void accept()
+        {
+        cout<<"Enter Name : ";
+        cin>>name;
+        cout<<"Enter Address : ";
+        cin>>addr;
+        cout<<"Enter Salary : ";
+        cin>>sal;
+        }
+ 
+        void display()
+        {
+        cout<<"\n\n-----Person information-----";
+        cout<<"\nPerson Name : "<<name;
+        cout<<"\nPerson Address : "<<addr;
+        cout<<"\nPerson Salary : "<<sal;
+        cout<<"\nTax is : "<<tax;
+        }
+ 
+        void cal_tax(){
+	        if(sal<=20000){
+	        	tax=0;
+	        }
+	        else if(sal>20000 && sal<=40000){
+	        	tax=(sal*5)/100;
+	        }
+	        else if(sal>40000){
+	        	tax=(sal*10)/100;
+	        }
+   		}
+};
+ 
+int main()
+{
+person p;
+
+p.accept();
+p.cal_tax();
+p.display();
+
+return 0;
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*   2.Create a C++ class Time with data members Hours, Minutes and Seconds.
+Write necessary member functions for the following: (Use Objects as arguments)
+1. To accept a time.
+2. To display a time In format hh:mm:ss.
+3. To find difference between two time and display it in format hh:mm:ss.[25 Marks]        */
+
+#include<iostream>
+#include<conio.h>
+using namespace std;
+class time
+{
+    int h,m,s;
+    public:
+        void accept();
+        void display();
+        time operator - (time t2);
+};
+ 
+void time::accept()
+{
+    cout<<"\nEnter Hour, Minutes and Seconds : ";
+    cin>>h>>m>>s;
+}
+ 
+void time::display()
+{
+    cout<<"\nTime is  : "<<h<<":"<<m<<":"<<s<<endl;
+}
+ 
+time time::operator - (time t2){
+	    time t;
+	    t.h=h-t2.h;
+	    t.m=m-t2.m;
+	    t.s=s-t2.s;
+	    return t;
+	}
+ 
+int main()
+{
+time t1,t2,t3;
+t1.accept();
+t1.display();
+t2.accept();
+t2.display();
+t3=t1.operator -(t2);//t3=t1-t2;
+cout<<"\nTime1-Time2\n";
+t3.display();
+return 0;
+}
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<?php
+class Calculate
+{
+    public $a;
+    public $b;
+    function __construct($a,$b){
+        $this->a=$a;
+        $this->b=$b;
+    }
+    public function add(){
+            $c=$this->a+$this->b;
+            echo"Addition = $c<br>";
+    }
+    public function subtract(){
+            $c=$this->a-$this->b;
+            echo"Subtract = $c<br>";
+    }
+    public function multiply(){
+            $c=$this->a*$this->b;
+            echo"Multiplication = $c<br>";
+    }
+    public function div(){
+            $c=$this->a/$this->b;
+            echo"Division = $c";
+    } 
+}
+$a=$_GET['a'];
+$b=$_GET['b'];
+$calc=new Calculate($a,$b);
+$calc->add();
+$calc->subtract();
+$calc->multiply();
+$calc->div();?>
+
+<html>
+<form action="slip9_a.php" method="GET">
+    Enter the value of a : <input type="text" name="a">
+    Enter the value of b : <input type="text" name="b">
+    <input type="submit" name="Submit">
+    <input type="reset" name="cancel">
+</form>
+</html>
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+CREATE DATABASE sybbaca;
+
+USE sybbaca;
+
+CREATE TABLE Movie (
+    movie_no INT PRIMARY KEY,
+    movie_name VARCHAR(100)
+);
+
+
+CREATE TABLE Actor (
+    actor_no INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+
+CREATE TABLE Movie_Actor (
+    movie_no INT,
+    actor_no INT,
+    FOREIGN KEY (movie_no) REFERENCES Movie(movie_no),
+    FOREIGN KEY (actor_no) REFERENCES Actor(actor_no)
+);
+
+
+INSERT INTO Movie (movie_no, movie_name) VALUES
+(1, 'Pathaan'),
+(2, 'Jawan'),
+(3, 'War'),
+(4, '3 Idiots');
+
+
+INSERT INTO Actor (actor_no, name) VALUES
+(1, 'Shah Rukh Khan'),
+(2, 'Hrithik Roshan'),
+(3, 'Aamir Khan');
+
+
+INSERT INTO Movie_Actor (movie_no, actor_no) VALUES
+(1, 1),  -- Pathaan - SRK
+(2, 1),  -- Jawan - SRK
+(3, 2),  -- War - Hrithik
+(4, 3);  -- 3 Idiots - Aamir
+
+
+
+---------------------------------------------
+
+<?php
+$actor_name = $_GET['actor'];
+
+$con = mysqli_connect("localhost", "root", "", "sybbaca");
+if (!$con) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT movie_name 
+        FROM Movie 
+        JOIN Movie_Actor ON Movie.movie_no = Movie_Actor.movie_no
+        JOIN Actor ON Actor.actor_no = Movie_Actor.actor_no
+        WHERE Actor.name LIKE '%$actor_name%'";
+
+$result = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+  echo "<b>Movies:</b><br>";
+  while($row = mysqli_fetch_assoc($result)) {
+    echo $row['movie_name'] . "<br>";
+  }
+} else {
+  echo "No movies found.";
+}
+
+mysqli_close($con);
+?>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    function sendRequest() {
+      var actor = document.getElementById("actor").value;
+      var action = document.querySelector('input[name="action"]:checked').value;
+
+      if (action === "accept" && actor != "") {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+          document.getElementById("result").innerHTML = this.responseText;
+        };
+        xhttp.open("GET", "slip9_b.php?actor=" + actor, true);
+        xhttp.send();
+      } else {
+        document.getElementById("result").innerHTML = "Only 'Accept' displays movies.";
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <h3>Select Action:</h3>
+  <input type="radio" name="action" value="accept" checked> Accept
+  <input type="radio" name="action" value="insert"> Insert
+  <input type="radio" name="action" value="update"> Update
+
+  <br><br>
+
+  Enter Actor Name: <input type="text" id="actor" onkeyup="sendRequest()">
+
+  <div id="result" style="margin-top:20px;"></div>
+
+</body>
+</html>
+

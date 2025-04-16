@@ -1,0 +1,203 @@
+/*Q.1. Write a C++ program to check maximum and minimum of two integer numbers.
+(Use Inline function and Conditional operator) [15 Marks]*/
+
+#include<iostream.h>
+#include<conio.h>
+inline int max(int a,int b){
+	return a>b?a:b;
+}
+inline int min(int a,int b){
+	return a<b?a:b;
+}
+
+int main(){
+	 int a,b;
+	 a=10;
+	 b=20;
+	 cout<<"\nMaximum value is :"<<max(a,b);
+	 cout<<"\nMinimum value is :"<<min(a,b);
+	 return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*  2 .Create a C++ class MyFile with data members file pointer and filename. 
+Write necessary member functions to accept and display File. Overload the following
+ operators: operator example purpose 
+ + f3=f1+f2 concatenation of file f1 and file f2 inp f3
+ ! !f3 changes case of alternate character of file f3. [25 Marks]      */
+
+
+#include <iostream.h>
+#include <fstream.h>
+#include <ctype.h>  // For toupper(), tolower(), islower()
+#include <conio.h>  // For getch()
+#include <string.h>
+
+class MyFile {
+    char filename[20];  // Store file name
+
+public:
+    MyFile(const char *fname) { strcpy(filename, fname); }
+
+    void display() {
+	ifstream file(filename);
+	if (!file) {
+	    cout << "File not found!\n";
+	    return;
+	}
+	char ch;
+	while (file.get(ch)) {
+            cout << ch;
+        }
+        file.close();
+        cout << endl;
+    }
+
+    MyFile operator+(MyFile f) {
+        MyFile temp("merged.txt");
+        ofstream fout(temp.filename);
+        ifstream fin1(filename), fin2(f.filename);
+
+        char ch;
+        while (fin1.get(ch)) fout.put(ch);  // Copy first file
+        while (fin2.get(ch)) fout.put(ch);  // Copy second file
+
+        fin1.close();
+        fin2.close();
+        fout.close();
+        return temp;
+    }
+
+    void operator!() {
+        fstream file(filename, ios::in | ios::out);
+        if (!file) {
+            cout << "File not found!";
+            return;
+        }
+
+        char ch;
+        int pos = 0;
+        while (file.get(ch)) {
+            file.seekp(pos, ios::beg);
+            file.put(islower(ch) ? toupper(ch) : tolower(ch));  // Toggle case
+            pos++;
+        }
+        file.close();
+    }
+};
+
+int main() {
+    MyFile f1("file1.txt"), f2("file2.txt");
+
+    cout << "File 1 Contents:\n";
+    f1.display();
+
+    cout << "\nFile 2 Contents:\n";
+    f2.display();
+
+    MyFile f3 = f1 + f2;  // Concatenation
+    cout << "\nMerged File Contents:\n";
+    f3.display();
+
+    !f3;  // Change alternate character case
+    cout << "\nAfter ! Operator (Alternate Case Change):\n";
+    f3.display();
+
+    getch();  // Hold screen (Turbo C++)
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<?php
+class MyCalculator {
+    private $_fval, $_sval;
+    public function __construct( $fval, $sval ) {
+        $this->_fval = $fval;
+        $this->_sval = $sval;
+}
+public function add() {
+    return $this->_fval + $this->_sval;
+}
+public function subtract() {
+    return $this->_fval - $this->_sval;
+}
+public function multiply() {
+    return $this->_fval * $this->_sval;
+}
+public function divide() {
+    return $this->_fval / $this->_sval;
+}
+}
+$mycalc = new MyCalculator(12, 6); 
+echo "Addition :";
+echo $mycalc-> add()."<br>"; // Displays 18 
+echo "subtraction :";
+echo $mycalc-> subtract()."<br>"; // Displays 6
+echo "multiplication :";
+echo $mycalc-> multiply()."<br>"; // Displays 72
+echo "division  :";
+echo $mycalc-> divide()."<br>"; // Displays 2
+?>
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*           */
+
+
+
+<?php
+$msearch=$_GET['txt'];
+$xml=simplexml_load_file("slip1_b.xml");
+echo $xml->getName()."<br>";
+$hint="";
+$len=strlen($msearch!=="");
+if($msearch !=="")
+{
+	foreach($xml->children() as $student)
+	{
+		//if(strstr($movie->MovieName,substr($msearch,0,$len)))
+		if(strcmp($msearch,$student->sname)==0)
+		{
+			$hint=" Student Name: $student->sname <br>
+			       Cname: $student->cname<br>
+			       Percentage:$student->percentage<br>";
+		}
+	}
+
+}
+ echo $hint==="" ? "no suggestion":$hint;
+ ?>
+
+-------------
+<Course>
+    <SYBBACA>
+        <sname>Harsh</sname >
+        <cname>SYBBACA</cname >
+        <percentage>82</percentage>
+
+        <sname>Yash</sname >
+        <cname>SYBBA</cname >
+        <percentage>90</percentage>
+
+        <sname>Aman</sname >
+        <cname>SYBBAIB</cname >
+        <percentage>67</percentage>
+
+        <sname>Ajay</sname >
+        <cname>FYBBAIB</cname >
+        <percentage>77</percentage>
+        
+        <sname>Raj</sname >
+        <cname>FYBBA</cname >
+        <percentage>87</percentage>
+    </SYBBACA>
+</Course>

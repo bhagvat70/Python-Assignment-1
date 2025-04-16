@@ -1,0 +1,279 @@
+
+/* 1. Create a C++ class MyMatrix. Write C++ program to accept an display matrix. Overload Binary “-” operator to calculate subtraction 
+of matrix.[15 Marks]          */
+
+#include <iostream.h>
+#include <conio.h>
+
+class MyMatrix {
+private:
+    int rows, cols;
+    int matrix[10][10];
+
+public:
+    MyMatrix(int r = 0, int c = 0) {
+        rows = r;
+        cols = c;
+    }
+
+    void acceptMatrix() {
+        cout << "Enter elements of " << rows << "x" << cols << " matrix:\n";
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                cin >> matrix[i][j];
+            }
+        }
+    }
+
+    void displayMatrix() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                cout << matrix[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    MyMatrix operator-(MyMatrix &m) {
+        MyMatrix result(rows, cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result.matrix[i][j] = matrix[i][j] - m.matrix[i][j];
+            }
+        }
+        return result;
+    }
+};
+
+int main() {
+    int r, c;
+    clrscr();
+
+    cout << "Enter number of rows and columns: ";
+    cin >> r >> c;
+
+    MyMatrix mat1(r, c), mat2(r, c), result;
+
+    cout << "Enter elements for first matrix:\n";
+    mat1.acceptMatrix();
+    cout << "Enter elements for second matrix:\n";
+    mat2.acceptMatrix();
+
+    result = mat1 - mat2;
+
+    cout << "First Matrix:\n";
+    mat1.displayMatrix();
+
+    cout << "Second Matrix:\n";
+    mat2.displayMatrix();
+
+    cout << "Resultant Matrix after Subtraction:\n";
+    result.displayMatrix();
+
+    getch();
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*2.Design two base classes Student (S_id, S_Name, Class) and Competition (C_id, C_Name). Derive a class Stud Comp(Rank) from it. 
+Write a menu driven program to perform following functions:
+i. Accept information.
+ii. Display information.
+iii. Display Student Details In the ascending order of Rank of a specified competition. (Use array of objects)[25 Marks]*/
+
+#include <iostream.h>
+#include <conio.h>
+
+class Student {
+public:
+    int s_id;
+    char sname[50], sclass[20];
+
+    void accept() {
+        cout << "Enter ID: ";
+        cin >> s_id;
+        cout << "Enter Name: ";
+        cin >> sname;
+        cout << "Enter Class: ";
+        cin >> sclass;
+    }
+
+    void display() {
+        cout << "ID: " << s_id << "\tName: " << sname << "\tClass: " << sclass;
+    }
+};
+
+class Competition {
+public:
+    int c_id;
+    char cname[50];
+
+    void accept() {
+        cout << "Enter Competition ID: ";
+        cin >> c_id;
+        cout << "Enter Competition Name: ";
+        cin >> cname;
+    }
+
+    void display() {
+        cout << "\tComp ID: " << c_id << "\tComp Name: " << cname;
+    }
+};
+
+class Stud_comp : public Student, public Competition {
+public:
+    int rank;
+
+    void accept() {
+        Student::accept();
+        Competition::accept();
+        cout << "Enter Rank: ";
+        cin >> rank;
+    }
+
+    void display() {
+        Student::display();
+        Competition::display();
+        cout << "\tRank: " << rank << endl;
+    }
+};
+
+void sortByRank(Stud_comp arr[], int n) {
+    int i, j;
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - i - 1; j++) {
+            if (arr[j].rank > arr[j + 1].rank) {
+                Stud_comp temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    clrscr();
+    int n, ch, c_id, i;
+    cout << "Enter number of students: ";
+    cin >> n;
+    Stud_comp *s = new Stud_comp[n];
+
+    do {
+        cout << "\nMENU:\n1. Accept Info\n2. Display Info\n3. Sort by Rank for Comp\n4. Exit\nEnter choice: ";
+        cin >> ch;
+
+        switch (ch) {
+        case 1:
+            for (i = 0; i < n; i++) s[i].accept();
+            break;
+        case 2:
+            for (i = 0; i < n; i++) s[i].display();
+            break;
+        case 3:
+            cout << "Enter Comp ID: ";
+            cin >> c_id;
+            sortByRank(s, n);
+            cout << "\nSorted Students for Comp ID " << c_id << ":\n";
+            for (i = 0; i < n; i++) {
+                if (s[i].c_id == c_id) s[i].display();
+            }
+            break;
+        case 4:
+            cout << "Exiting...";
+            break;
+        default:
+            cout << "Invalid choice.";
+        }
+    } while (ch != 4);
+
+    delete[] s;
+    getch();
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+<html>
+<body>
+<table border="1">
+<tr>
+<th>PHP_SELF</th>
+<th>SERVER_NAME</th>
+<th>HTTP_HOST</th>
+<th>SCRIPT_NAME</th>
+</tr>
+<tr>
+<?php
+echo "<td>" .$_SERVER['PHP_SELF'] ."</td>";
+echo "<td>" .$_SERVER['SERVER_NAME'] ."</td>";
+echo "<td>" .$_SERVER['HTTP_HOST'] ."</td>";
+echo "<td>".$_SERVER['SCRIPT_NAME']."</td>";
+echo $_SERVER['HTTP_REFERER'];
+echo "<br>";
+echo $_SERVER['HTTP_USER_AGENT'];
+echo "<br>";
+
+?>
+</tr>
+</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+Uname {
+    color: black;
+    font-family: "Copperplate Gothic Light", serif;
+    font-size: 16pt;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+City, Rank {
+    color: yellow;
+    font-family: Arial, sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    display: block;
+}
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="slip17_b.css"?>
+
+<Universities>
+    <University>
+        <Uname>MIT Alandi</Uname>
+        <City>Pune</City>
+        <Rank>1</Rank>
+    </University>
+    <University>
+        <Uname>IIT Bombay</Uname>
+        <City>Mumbai</City>
+        <Rank>2</Rank>
+    </University>
+    <University>
+        <Uname>SPPU</Uname>
+        <City>Pune</City>
+        <Rank>3</Rank>
+    </University>
+</Universities>
+
+
+
+

@@ -1,0 +1,273 @@
+
+/*   1 .Write a C++ program to create a class Date with data members day, month, and year. Use default and parameterized constructor to initialize date and display date 
+in dd-Mon-yyyy format. (Example: Input: 04-01-2021 Output: 04-Jan-2021)[15 Marks]        */
+
+#include<iostream.h>
+#include<conio.h>
+#include<string.h>
+
+class date{
+  private :
+	int day,month,year;
+	char months[12][4];
+  public :
+	date(){
+	 day=1;
+	 month=1;
+	 year=2000;
+
+	 strcpy(months[0],"Jan");
+	 strcpy(months[1],"Feb");
+	 strcpy(months[2],"Mar");
+	 strcpy(months[3],"Apr");
+	 strcpy(months[4],"May");
+	 strcpy(months[5],"Jun");
+	 strcpy(months[6],"Jul");
+	 strcpy(months[7],"Aug");
+	 strcpy(months[8],"Sep");
+	 strcpy(months[9],"Oct");
+	 strcpy(months[10],"Nov");
+	 strcpy(months[11],"Dec");
+	}
+	date(int d, int m, int y){
+	 day=d;
+	 month=m;
+	 year=y;
+	 strcpy(months[0],"Jan");
+	 strcpy(months[1],"Feb");
+	 strcpy(months[2],"Mar");
+	 strcpy(months[3],"Apr");
+	 strcpy(months[4],"May");
+	 strcpy(months[5],"Jun");
+	 strcpy(months[6],"Jul");
+	 strcpy(months[7],"Aug");
+	 strcpy(months[8],"Sep");
+	 strcpy(months[9],"Oct");
+	 strcpy(months[10],"Nov");
+	 strcpy(months[11],"Dec");
+	}
+
+	void display(){
+	 cout<<(day<10 ? "0":"")<<day<<"-"<<months[month-1]<<"-"<<year<<endl;
+	}
+
+};
+int main(){
+	int d,m,y;
+	clrscr();
+	cout<<"\nEnter date (dd mm yyyy) : ";
+	cin>>d>>m>>y;
+	if(m<1 || m>12){
+	 cout<<"\nInvalid Month! Please Enter valid date."<<endl;
+	 getch();
+	 return 1;
+	}
+	date ob(d,m,y);
+	ob.display();
+	return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*2.Create a C++ class Weight with data members kilogram, gram. Write a C++ program using operator overloading to perform following 
+functions:
+i.   To accept weight.
+ii.  To display weight in kilogram and gram format.
+iii. Overload += operator to add two weights.
+iv.  Overload == operator to check equality of two weights [25 Marks]       */
+
+
+#include <iostream>
+#include <conio.h>
+using namespace std;
+class Weight {
+private:
+    int kg;
+    int gm;
+
+public:
+    void accept() {
+	cout << "Enter weight (kg grams): ";
+	cin >> kg >> gm;
+    }
+
+    void display() {
+	cout << kg << " kg " << gm << " g\n";
+    }
+
+    void normalize() {
+	kg =kg+ gm / 1000;
+	gm = gm % 1000;
+    }
+
+    Weight operator+=(const Weight &w) {
+	kg =kg+w.kg;
+	gm =gm+ w.gm;
+	normalize();
+	return *this;
+    }
+
+    int operator==(const Weight &w) {
+	return (kg == w.kg && gm == w.gm);
+    }
+};
+
+int main() {
+
+    Weight w1, w2;
+    int choice;
+
+    do {
+	cout << "\n1. Accept Weights";
+	cout << "\n2. Display Weights";
+	cout << "\n3. Add Weights (+=)";
+	cout << "\n4. Check Equality (==)";
+	cout << "\n5. Exit";
+	cout << "\nEnter your choice: ";
+	cin >> choice;
+
+	switch (choice) {
+	case 1:
+	    cout << "Enter first weight:\n";
+	    w1.accept();
+	    cout << "Enter second weight:\n";
+	    w2.accept();
+	    break;
+	case 2:
+	    cout << "First Weight: ";
+	    w1.display();
+	    cout << "Second Weight: ";
+	    w2.display();
+	    break;
+	case 3:
+	    w1 += w2;
+	    cout << "Updated First Weight: ";
+	    w1.display();
+	    break;
+	case 4:
+	    if (w1 == w2)
+		cout << "Both weights are equal.\n";
+	    else
+		cout << "Weights are not equal.\n";
+	    break;
+	case 5:
+	    cout << "Exiting...\n";
+	    break;
+	default:
+	    cout << "Invalid choice! Try again.\n";
+	}
+    } while (choice != 5);
+
+    getch();
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fahrenheit to Celsius</title>
+</head>
+<body>
+    <h2>Fahrenheit to Celsius Converter</h2>
+
+    <?php
+    $f = "";
+    $c = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $f = $_POST["f"];
+        if (is_numeric($f)) {
+            $c = ($f - 32) * 5 / 9;
+        } else {
+            echo "<p style='color:red;'>Please enter a valid number.</p>";
+        }
+    }
+    ?>
+
+    <form method="post">
+        Fahrenheit: 
+        <input type="text" name="f" value="" required>
+        <input type="submit" value="Convert">
+    </form>
+
+    <?php
+    if ($c !== "" && is_numeric($c)) {
+        echo "<p>$f °F = ".round($c, 2)."°C</p>";
+    }
+    ?>
+</body>
+</html>
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<?php
+// Read data from contact.dat file
+$data = file('contact.dat');
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <script>
+        // AJAX function to load contacts when the button is clicked
+        function loadContacts() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("output").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.open("GET", "contacts.php", true);
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h2>Contact List</h2>
+    <button onclick="loadContacts()">Print</button>
+
+    <div id="output" style="margin-top:20px;">
+        <!-- Display contacts here by loading the file content directly -->
+        <table border='1' cellpadding='10'>
+            <tr><th>Sr No</th><th>Name</th><th>Residence No</th><th>Mobile No</th></tr>
+            <?php
+            foreach ($data as $line) {
+                $line = explode(",", $line);
+                echo "<tr>";
+                foreach ($line as $item) {
+                    echo "<td>" . htmlspecialchars(trim($item)) . "</td>";
+                }
+                echo "</tr>";
+            }
+            ?>
+        </table>
+    </div>
+</body>
+</html>
+
+

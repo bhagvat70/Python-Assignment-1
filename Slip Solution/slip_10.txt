@@ -1,0 +1,244 @@
+
+/*   1.Write a C++ program to create a class Account with data members Acc number, Acc type and Balance.
+Write member functions to accept and display ‘n’ account details. (Use dynamic memory allocation)[15 Marks]        */
+
+
+#include<iostream.h>
+#include<conio.h>
+class Account{
+  public:
+  int bal ,accno;
+  char ac_type[30];
+  void accept(){
+	cout<<"Enter account number : "; cin>>accno;
+	cout<<"Enter account type : "; cin>>ac_type;
+	cout<<"Enter balance : "; cin>>bal;
+  }
+  void display(){
+	cout<<"\nAccount Number : "<<accno;
+	cout<<"\nAccount Type : " <<ac_type;
+	cout<<"\nBalance : " <<bal;
+  }
+};
+
+int main(){
+	 int n;
+	 cout<<"\nHow many elemets you want to enter : ";
+	 cin>>n;
+	 Account *ob = new Account[n];
+	 for(int i=0;i<n;i++){
+		ob[i].accept();
+		cout<<endl;
+	 }
+	 cout<<"\n----Display----";
+	 for(i=0 ; i<n ; i++){
+		ob[i].display();
+		cout<<endl;
+	 }
+	  delete[] ob;
+	 return 0;
+}
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*   2.Create a C++ class City with data members City code, City name, population. Write necessary member functions for the following:
+i.Accept details of n cities
+ii. Display details of n cities in ascending order of population.
+iii. Display details of a particular city.
+(Use Array of object and to display city information use manipulators.)[25 Marks]        */
+
+
+#include <iostream.h>
+#include <conio.h>
+#include <iomanip.h>
+#include <string.h>
+
+class City {
+private:
+    int cityCode;
+    char cityName[50];
+    int population;
+
+public:
+    void accept() {
+        cout << "Enter City Code: ";
+        cin >> cityCode;
+        cout << "Enter City Name: ";
+        cin >> cityName;
+        cout << "Enter Population: ";
+        cin >> population;
+    }
+
+    void display() {
+        cout << setw(12) << cityCode
+             << setw(20) << cityName
+             << setw(12) << population << endl;
+    }
+
+    int getPopulation() { return population; }
+    int getCityCode() { return cityCode; }
+};
+
+void sortCitiesByPopulation(City cities[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (cities[j].getPopulation() > cities[j + 1].getPopulation()) {
+                City temp = cities[j];
+                cities[j] = cities[j + 1];
+                cities[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void displayAllCities(City cities[], int n) {
+    cout << "\nCity Details in Ascending Order of Population:\n";
+    cout << setw(12) << "City Code"
+         << setw(20) << "City Name"
+         << setw(12) << "Population" << endl;
+    cout << "---------------------------------------------\n";
+    for (int i = 0; i < n; i++) {
+        cities[i].display();
+    }
+}
+
+void searchCity(City cities[], int n, int searchCode) {
+    int found = 0;
+    for (int i = 0; i < n; i++) {
+        if (cities[i].getCityCode() == searchCode) {
+            cout << "\nCity Details Found:\n";
+            cout << setw(12) << "City Code"
+                 << setw(20) << "City Name"
+                 << setw(12) << "Population" << endl;
+            cout << "---------------------------------------------\n";
+            cities[i].display();
+            found = 1;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "\nCity with Code " << searchCode << " not found.\n";
+    }
+}
+
+void main() {
+    clrscr();
+    int n;
+    cout << "Enter number of cities: ";
+    cin >> n;
+    City cities[10];
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details for City " << i + 1 << ":\n";
+        cities[i].accept();
+    }
+
+    sortCitiesByPopulation(cities, n);
+    displayAllCities(cities, n);
+
+    int searchCode;
+    cout << "\nEnter City Code to search: ";
+    cin >> searchCode;
+    searchCity(cities, n, searchCode);
+
+    getch();
+}
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<?php
+class Myclass
+{
+            public $a;
+            public $b=305;
+            public $c='Akshay';
+            function Myclass()
+    {
+                        
+            }
+            function myfun1()
+    {
+                      
+    }
+            function myfun2()
+    {
+                        
+    }
+}
+            $class=get_declared_classes();
+            foreach($class as $cname)
+            {
+                        echo"$cname<br>";
+            }
+            echo"<br>Class Methods are : <br>";
+            $m=get_class_methods('Myclass');
+            foreach($m as $mname)
+            {
+                        echo"$mname<br>";
+            }
+            $cp=get_class_vars('Myclass');
+            echo"class variables are :<br>";
+            foreach($cp as $cpname => $v)
+            {
+                        echo"$cpname : $v <br>";
+            }
+
+?>
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<html>
+<body>
+<form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+Select options:
+
+<input type="radio" value="push" name="d1">Push</input>
+<input type="radio" value="pop" name="d1">Pop</input>
+<input type="radio" value="display" name="d1">Display</input>
+<input type="submit">
+</form>
+<?php
+echo "
+Index ARRAY.......
+";
+$a = array(1,2,3,4,5,6,7);
+print_r($a);
+print"<br>";
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+$opt = $_POST['d1'];
+if($opt == 'push')
+{
+array_push($a,11);
+print_r($a);
+}
+
+else if($opt == 'pop')
+{
+array_pop($a);
+print_r($a);
+}
+else if($opt == 'display')
+{
+//array_pop($a);
+print_r($a);
+}
+
+}
+?>

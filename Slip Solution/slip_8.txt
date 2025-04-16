@@ -1,0 +1,298 @@
+
+/*   1.Write a C++ program create a class Number, which contain static data member ‘cnt’ and member function ‘Display()’. Display() should print number of 
+times display operation is performed irrespective of the object responsible for calling Display().[15 Marks] */
+
+
+#include<iostream.h>
+#include<conio.h>
+class Number{
+  static int cnt;
+  public:
+     void display(){
+      cout<<"\nDisplay Function Is called:" <<cnt <<"time";
+      cnt++;
+     }
+};
+int Number::cnt=1;
+int main(){
+ Number ob1,ob2;
+ ob1.display();
+ ob1.display();
+ ob2.display();
+ ob2.display();
+ return 0;
+}
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*   2.Create a C++ class Person with data members Person name, Mobile number, Age, City. Write necessary member functions for the following:
+i. Search the mobile number of given person.
+ii. Search the person name of given mobile number.
+iii. Search all person details of given city.
+(Use function overloading)[25 Marks]        */
+
+
+
+#include <iostream.h>
+#include <conio.h>
+#include <string.h>
+
+class Person {
+    char name[50], city[50], mobile[15];
+    int age;
+
+public:
+    void accept() {
+        cout << "\nEnter Name: ";
+        cin >> name;
+        cout << "Enter Mobile Number: ";
+        cin >> mobile;
+        cout << "Enter Age: ";
+        cin >> age;
+        cout << "Enter City: ";
+        cin >> city;
+    }
+
+    void display() {
+        cout << "\nName: " << name;
+        cout << "\nMobile: " << mobile;
+        cout << "\nAge: " << age;
+        cout << "\nCity: " << city << "\n";
+    }
+
+    void search(char personName[]) {
+        if (strcmp(name, personName) == 0) {
+            cout << "\nMobile Number: " << mobile << "\n";
+        }
+    }
+
+    void searchByMobile(char mobileNumber[]) {
+        if (strcmp(mobile, mobileNumber) == 0) {
+            cout << "\nName: " << name << "\n";
+        }
+    }
+
+    void searchByCity(char cityName[]) {
+        if (strcmp(city, cityName) == 0) {
+            display();
+        }
+    }
+};
+
+void main() {
+    clrscr(); // Clear screen for Turbo C++
+
+    int n;
+    cout << "Enter number of persons: ";
+    cin >> n;
+
+    Person persons[10]; // Fixed-size array (Turbo C++ does not support dynamic arrays)
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details for person " << i + 1 << ":\n";
+        persons[i].accept();
+    }
+
+    int choice;
+    char searchValue[50];
+
+    do {
+        cout << "\nMenu:\n1. Search Mobile Number by Name\n2. Search Name by Mobile Number\n3. Search Persons in a City\n4. Exit\nEnter Choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "\nEnter Name: ";
+                cin >> searchValue;
+                for (int i = 0; i < n; i++) {
+                    persons[i].search(searchValue);
+                }
+                break;
+
+            case 2:
+                cout << "\nEnter Mobile Number: ";
+                cin >> searchValue;
+                for (int i = 0; i < n; i++) {
+                    persons[i].searchByMobile(searchValue);
+                }
+                break;
+
+            case 3:
+                cout << "\nEnter City: ";
+                cin >> searchValue;
+                for (int i = 0; i < n; i++) {
+                    persons[i].searchByCity(searchValue);
+                }
+                break;
+
+            case 4:
+                cout << "\nExiting...\n";
+                break;
+
+            default:
+                cout << "\nInvalid Choice!\n";
+        }
+    } while (choice != 4);
+
+    getch(); // Wait for user input before closing
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+
+<HTML>
+    <FORM ACTION="slip8_a.php" METHOD="post">
+    <pre>
+    <h1>Circle:</h1>
+    
+            Radius: <input type=text name=a><BR>
+    
+    <h1>
+    square:</h1>
+    
+            side: <input type=text name=b><BR>
+    <h1>
+    Rectangle:
+    </h1>
+            length: <input type=text name=c><BR>
+    
+            Breadth: <input type=text name=d><BR>
+    <input type=submit value=submit> <input type="reset" value=cancel>
+    </pre>
+    </form>
+    </BODY>
+    </HTML>
+
+
+<HTML>
+<BODY>
+<?PHP
+$a=$_POST['a'];
+$b=$_POST['b'];
+$c=$_POST['c'];
+$d=$_POST['d'];
+
+interface one
+{
+        function area($c,$d);
+}
+class rect implements one
+{
+        function area($c,$d)
+        {
+                $area=$c*$d;
+                echo"Area of rectangle......:".$area;
+                echo"<br><BR>";
+        }
+}
+class square extends rect
+{
+        function area($b,$f)
+        {
+                $area=$b*$f;
+                echo"Area of Square.........:".$area;
+                echo"<BR><br>";
+        }
+}
+class circle
+{
+        function area($a)
+        {
+                $area=3.14*$a*$a;
+                echo"Area of circle.........:".$area;
+                echo"<br><BR>";
+        }
+}
+$o=new rect();
+$o->area($c,$d);
+$s=new square();
+$f=$b;
+$s->area($b,$f);
+$c=new circle();
+$c->area($a);
+echo "<br>";
+?>
+<a href="a4b1.html">come back</a><br>
+</BODY>
+</html>
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*           */
+
+
+
+<?xml version="1.0"?>
+<players>
+  <player>
+    <name>Virat Kohli</name>
+    <country>India</country>
+    <wickets>4</wickets>
+    <runs>12000</runs>
+  </player>
+  <player>
+    <name>Babar Azam</name>
+    <country>Pakistan</country>
+    <wickets>3</wickets>
+    <runs>8000</runs>
+  </player>
+</players>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function showDetails() {
+  var name = document.getElementById("player").value;
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onload = function() {
+    var xml = this.responseXML;
+    var players = xml.getElementsByTagName("player");
+
+    for (let i = 0; i < players.length; i++) {
+      if (players[i].getElementsByTagName("name")[0].textContent == name) {
+        document.getElementById("result").innerHTML =
+          "Name: " + name + "<br>" +
+          "Country: " + players[i].getElementsByTagName("country")[0].textContent + "<br>" +
+          "Wickets: " + players[i].getElementsByTagName("wickets")[0].textContent + "<br>" +
+          "Runs: " + players[i].getElementsByTagName("runs")[0].textContent;
+      }
+    }
+  };
+
+  xhttp.open("GET", "slip8_b.xml", true);
+  xhttp.send();
+}
+</script>
+</head>
+<body>
+
+<select id="player" onchange="showDetails()">
+  <option value="">--Select--</option>
+  <option value="Virat Kohli">Virat Kohli</option>
+  <option value="Babar Azam">Babar Azam</option>
+</select>
+
+<div id="result" style="margin-top:15px;"></div>
+
+</body>
+</html>
+

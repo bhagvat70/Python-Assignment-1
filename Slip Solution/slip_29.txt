@@ -1,0 +1,206 @@
+
+/* 1.Write a C++ program to create a class E Bill with data members Cust Name, Meter ID, No of Units and Total Charges. Write member functions to 
+accept and display customer information by calculating charges. (Rules to calculate electricity board charges)
+For first 100 units : Rs. 1 per unit
+For second 200 units : Rs. 2 per unit
+Beyond 300 units : Rs. 5 per unit
+All users are charged a minimum of Rs.150. If the total charge is more than Rs.250.00 then an additional charge of 15% is added.[15 Marks]          */
+
+#include<iostream>
+#include<conio.h>
+using namespace std;
+class Ebill{
+  char cust_name[30];
+  int meter_id;
+  int no_of_units;
+  float Total_charges;
+  public :
+	void accept();
+	void calculate();
+	void display();
+};
+void Ebill::accept(){
+ cout<<"\nEnter the cutomer name : ";cin>>cust_name;
+ cout<<"\nEnter the meter id : "; cin>>meter_id;
+ cout<<"\nEnter the No_of_units :";cin>>no_of_units;
+}
+void Ebill::calculate(){
+	if(no_of_units <=100){
+		Total_charges = no_of_units * 1;
+	}
+	else if(no_of_units <=200){
+	       Total_charges = (100*1)+((no_of_units-100)*2);
+	}
+	else{
+		Total_charges=(100*1)+(200*2)+((no_of_units-300)*5);
+	}
+
+	if(Total_charges < 250)
+		Total_charges=150;
+	if(Total_charges >250)
+		Total_charges=Total_charges+150+(Total_charges*0.15);
+}
+
+void Ebill::display(){
+ cout<<"\nCustomer Name : "<<cust_name<<endl;
+ cout<<"\nMeter Id : "<<meter_id<<endl;
+ cout<<"\nNo Of units : "<<no_of_units<<endl;
+ cout<<"\nTotal Charges : "<<Total_charges<<endl;
+}
+
+int main(){
+ Ebill ob;
+ ob.accept();
+ ob.calculate();
+ ob.display();
+ return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*2.Create a C++ class Visiting Staff with data members Name, No of Subjects, Name of Subjects[],Working hours, Total Salary. (Number of subjects varies
+ for a Staff).Write a parameterized constructor to initialize the data membersand create an array for Name of Subjects dynamically. 
+ Display Visiting Staff details by calculating salary. (Assume remuneration Rs. 300 per working hour)[25 Marks]           */
+
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Visiting_Staff {
+private:
+    string Name;         
+    int No_of_Subjects; 
+    string *Subjects;   
+    int Working_Hours;  
+    double Total_Salary;
+
+public:
+    Visiting_Staff(string name, int no_of_subjects, string subject_names[], int working_hours) {
+        Name = name;
+        No_of_Subjects = no_of_subjects;
+        Working_Hours = working_hours;
+        Total_Salary = Working_Hours * 300; 
+
+        Subjects = new string[No_of_Subjects];
+        for (int i = 0; i < No_of_Subjects; i++) {
+            Subjects[i] = subject_names[i];
+        }
+    }
+
+    void Display_Details() {
+        cout << "\nVisiting Staff Details:\n";
+        cout << "Name: " << Name << endl;
+        cout << "Number of Subjects: " << No_of_Subjects << endl;
+        cout << "Subjects: ";
+        for (int i = 0; i < No_of_Subjects; i++) {
+            cout << Subjects[i] << ((i < No_of_Subjects - 1) ? ", " : "\n");
+        }
+        cout << "Working Hours: " << Working_Hours << endl;
+        cout << "Total Salary: Rs. " << Total_Salary << endl;
+    }
+
+    ~Visiting_Staff() {
+        delete[] Subjects;
+    }
+};
+
+int main() {
+    int no_of_subjects, working_hours;
+    string name;
+
+    cout << "Enter Staff Name: ";
+    getline(cin, name);
+
+    cout << "Enter Number of Subjects: ";
+    cin >> no_of_subjects;
+
+    string *subject_names = new string[no_of_subjects]; 
+    cout << "Enter Subject Names:\n";
+    cin.ignore();
+    for (int i = 0; i < no_of_subjects; i++) {
+        cout << "Subject " << i + 1 << ": ";
+        getline(cin, subject_names[i]);
+    }
+
+    cout << "Enter Working Hours: ";
+    cin >> working_hours;
+
+    Visiting_Staff staff(name, no_of_subjects, subject_names, working_hours);
+    staff.Display_Details();
+
+    delete[] subject_names; 
+
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine</title>
+    <script>
+        function searchItems() {
+            var query = document.getElementById('search').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "slip29_a.php?q=" + query, true);
+            xhr.onload = function() {
+                document.getElementById('result').innerHTML = xhr.responseText;
+            };
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h2>Simple Search Engine</h2>
+    <input type="text" id="search" onkeyup="searchItems()" placeholder="Search...">
+    <div id="result"></div>
+</body>
+</html>
+
+
+
+
+
+<?php
+$items = ["PHP Programming", "JavaScript Basics", "Learn HTML", "AJAX Tutorial", "Node.js Guide"];
+
+$query = isset($_GET['q']) ? $_GET['q'] : '';
+
+if ($query) {
+    $results = [];
+    foreach ($items as $item) {
+        if (stripos($item, $query) !== false) {
+            $results[] = $item;
+        }
+    }
+    if (count($results) > 0) {
+        foreach ($results as $result) {
+            echo "<div>$result</div>";
+        }
+    } else {
+        echo "No results found";
+    }
+}
+?>
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */

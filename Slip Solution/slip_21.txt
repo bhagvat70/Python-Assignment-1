@@ -1,0 +1,324 @@
+
+
+/* 1 . Create a C++ class Employee with data members Emp id, Emp Name, Company Name and Salary. Write member functions to accept and display 
+Employee information. Design User defined Manipulator to print Salary. (For Salary set right justification, maximum width to 7 and 
+fill remaining spaces with ‘*’)[15 Marks]          */
+
+#include <iostream.h>
+#include <iomanip.h>
+#include <conio.h>
+
+class Employee {
+private:
+    int empId;
+    char empName[50], companyName[50];
+    float salary;
+
+public:
+    void accept() {
+        cout << "Enter Employee ID: ";
+        cin >> empId;
+        cout << "Enter Employee Name: ";
+        cin >> empName;
+        cout << "Enter Company Name: ";
+        cin >> companyName;
+        cout << "Enter Salary: ";
+        cin >> salary;
+    }
+
+    void display() {
+	cout << "\nEmployee ID: " << empId;
+	cout << "\nEmployee Name: " << empName;
+	cout << "\nCompany Name: " << companyName;
+	cout << "\nSalary: " << formatSalary << salary << endl;
+    }
+
+    friend ostream& formatSalary(ostream& out);
+};
+
+ostream& formatSalary(ostream& out) {
+    out << setfill('*') << setw(7) << ios::right;
+    return out;
+}
+
+void main() {
+    clrscr();
+
+    Employee emp;
+    emp.accept();
+
+    cout << "\nEmployee Details:\n";
+    emp.display();
+
+    getch();
+}
+
+
+
+
+
+#include<iostream.h>
+#include<conio.h>
+#include<iomanip.h>
+ 
+class employee
+{
+    char ename[10],cname[10];
+    int empid,salary;
+    public:
+        void accept()
+        {
+            cout<<"\nEnter employee id : ";
+            cin>>empid;
+            cout<<"Enter employee name : ";
+            cin>>ename;
+            cout<<"Enter company name : ";
+            cin>>cname;
+            cout<<"Enter salary : ";
+            cin>>salary;
+        }
+ 
+        void display()
+        {
+            cout<<"\n\nEmployee Id : "<<empid;
+            cout<<"\nEmployee Name : "<<ename;
+            cout<<"\nCompany Name : "<<cname;
+            cout.width(7);
+            cout.fill('*');
+            cout.right;
+            cout<<"\nSalary : "<<setw(7)<<salary;
+        }
+};
+ 
+int main()
+{
+    employee *e;
+    int i,n;
+    clrscr();
+    cout<<"\nEnter number of employee : ";
+    cin>>n;
+    for(i=0;i<n;i++)
+    {
+        e[i].accept();
+    }
+ 
+    for(i=0;i<n;i++)
+    {
+        e[i].display();
+    }
+ 
+    getch();
+    return 0;
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*   2.Create a C++ class for a two dimensional points. Write necessary member functions to accept & display the point object. Overload the
+ following operators:
+
+ Operator            Example        Purpos
++ (Binary)           P3=P1+P2       Adds coordinates of point p1 and p2.
+-(Unary)  			 -P1 			Negates coordinates of point p1
+*(Binary)     		 P2=P1*n		Multiply coordinates of point p1 by constant ‘n ‘.[25 Marks]        */
+
+
+#include <iostream.h>
+#include <conio.h>
+
+class Point {
+private:
+    int x, y;
+public:
+    Point(int a = 0, int b = 0) {
+        x = a;
+        y = b;
+    }
+
+    void accept() {
+        cout << "Enter x and y coordinates: ";
+        cin >> x >> y;
+    }
+
+    void display() {
+        cout << "(" << x << ", " << y << ")" << endl;
+    }
+
+    Point operator+(Point p) {
+        return Point(x + p.x, y + p.y);
+    }
+
+    Point operator-() {
+        return Point(-x, -y);
+    }
+
+    Point operator*(int n) {
+        return Point(x * n, y * n);
+    }
+};
+
+void main() {
+    clrscr();
+    
+    Point p1, p2, p3, p4;
+    int n;
+
+    cout << "Enter first point:\n";
+    p1.accept();
+    
+    cout << "Enter second point:\n";
+    p2.accept();
+    
+    cout << "Enter a constant for multiplication: ";
+    cin >> n;
+
+    p3 = p1 + p2;
+    p4 = p1 * n;
+    
+    cout << "\nAddition of points: ";
+    p3.display();
+    
+    cout << "Negation of first point: ";
+    (-p1).display();
+    
+    cout << "Multiplication of first point with " << n << ": ";
+    p4.display();
+
+    getch();
+}
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+<?xml version="1.0" encoding="utf-8"?>
+<course>
+<computerscience>
+<studentname>Samir Thorat </studentname>
+<classname>SYBCA. </classname>
+<percentage>60 </percennatage>
+</computerscience>
+
+<computerscience>
+<studentname>Sunil Kamble </studentname>
+<classname>SYBCA. </classname>
+<percentage>55 </percennatage>
+</computerscience>
+<computerscience>
+<studentname>Anil Kamble </studentname>
+<classname>SYBCA. </classname>
+<percentage>60 </percennatage>
+</computerscience>
+
+<computerscience>
+<studentname>Asha Kamble </studentname>
+<classname>SYBCA. </classname>
+<percentage>65 </percennatage>
+</computerscience>
+
+<computerscience>
+<studentname>Madhuri </studentname>
+<classname>SYBCA. </classname>
+<percentage>70 </percennatage>
+</computerscience>
+</course>
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+<?php
+interface IResult {
+    public function calculateResult();
+}
+
+class Student {
+    public $roll, $name, $prn;
+
+    function setStudent($r, $n, $p) {
+        $this->roll = $r;
+        $this->name = $n;
+        $this->prn = $p;
+    }
+
+    function showStudent() {
+        echo "Roll No: $this->roll<br>Name: $this->name<br>PRN: $this->prn<br>";
+    }
+}
+
+class Marks extends Student {
+    public $php, $os, $cpp, $net;
+
+    function setMarks($php, $os, $cpp, $net) {
+        $this->php = $php;
+        $this->os = $os;
+        $this->cpp = $cpp;
+        $this->net = $net;
+    }
+}
+
+class Result extends Marks implements IResult {
+    public $total, $percent, $grade;
+
+    function calculateResult() {
+        $this->total = $this->php + $this->os + $this->cpp + $this->net;
+        $this->percent = $this->total / 4;
+        if ($this->percent >= 75) $this->grade = "A";
+        elseif ($this->percent >= 60) $this->grade = "B";
+        elseif ($this->percent >= 50) $this->grade = "C";
+        else $this->grade = "Fail";
+    }
+
+    function showResult() {
+        echo "Marks: PHP=$this->php, OS=$this->os, CPP=$this->cpp, Net=$this->net<br>";
+        echo "Total: $this->total<br>Percentage: $this->percent%<br>Grade: $this->grade<br>";
+    }
+}
+
+$s = new Result();
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['submit'])) {
+        $s->setStudent($_POST['roll'], $_POST['name'], $_POST['prn']);
+        $s->setMarks($_POST['php'], $_POST['os'], $_POST['cpp'], $_POST['net']);
+        $s->calculateResult();
+        echo "<h3>Student Result</h3>";
+        $s->showStudent();
+        $s->showResult();
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head><title>Student Result System</title></head>
+<body>
+<h2>Enter Student Information</h2>
+<form method="post">
+    Roll No: <input type="text" name="roll"><br>
+    Name: <input type="text" name="name"><br>
+    PRN: <input type="text" name="prn"><br><br>
+    Marks:<br>
+    PHP: <input type="number" name="php"><br>
+    OS: <input type="number" name="os"><br>
+    CPP: <input type="number" name="cpp"><br>
+    Networking: <input type="number" name="net"><br><br>
+    <input type="submit" name="submit" value="Show Result">
+</form>
+</body>
+</html>
+

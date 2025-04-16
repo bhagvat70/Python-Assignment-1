@@ -1,0 +1,193 @@
+
+
+
+/*  1. Write a C++ program to read array of ‘n’ integers from user and display it in reverse order.
+(Use Dynamic memory allocation)[15 Marks]         */
+
+#include<iostream.h>
+#include<conio.h>
+
+int main(){
+	int i,*arr;
+	int n;
+	
+	arr=new int(n);
+	cout<<"\nEnter the numbers you want to enter :";
+	cin>>n;
+	
+	for(i=0;i<n;i++){
+		cin>>arr[i];
+	}
+	
+	cout<<"\nOriginal array :";
+	for(i=0;i<n;i++){
+		cout<<arr[i]<<"\t";
+	}
+	
+	cout<<"\nreverse array :";
+	for(i=n-1;i>=0;i--){
+		cout<<arr[i]<<"\t";
+	}
+	return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*2.Create a C++ class Employee with data members Emp Id, Emp Name, Mobile No, Salary. Write necessary member functions for the following:
+i. Accept details of n employees
+ii. Display employee details in descending order of their salary
+iii. Display details of a particular employee.
+(Use Array of object and Use appropriate manipulators)[25 Marks]          */
+
+
+#include <iostream.h>
+#include <conio.h>  // For clrscr() and getch()
+#include <stdio.h>  // For gets() in Turbo C++
+
+class Employee {
+    int empId;
+    char empName[50];  // Using char array instead of string
+    char mobileNo[15];
+    float salary;
+
+public:
+    void acceptDetails() {
+        cout << "Enter Employee ID: ";
+        cin >> empId;
+        cin.ignore();  // Ignore newline character
+        cout << "Enter Employee Name: ";
+        gets(empName); // Turbo C++ does not support getline()
+        cout << "Enter Mobile Number: ";
+        cin >> mobileNo;
+        cout << "Enter Salary: ";
+        cin >> salary;
+    }
+
+    void displayDetails() {
+        cout << empId << "\t" << empName << "\t" << mobileNo << "\t" << salary << endl;
+    }
+
+    int getEmpId() {
+        return empId;
+    }
+
+    float getSalary() {
+        return salary;
+    }
+};
+
+void sortBySalary(Employee emp[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (emp[j].getSalary() < emp[j + 1].getSalary()) {
+                Employee temp = emp[j];
+                emp[j] = emp[j + 1];
+                emp[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void searchEmployee(Employee emp[], int n, int searchId) {
+    for (int i = 0; i < n; i++) {
+        if (emp[i].getEmpId() == searchId) {
+            cout << "\nEmployee Found:\n";
+            cout << "Emp ID\tName\tMobile No\tSalary\n";
+            cout << "------------------------------------\n";
+            emp[i].displayDetails();
+            return;
+        }
+    }
+    cout << "Employee with ID " << searchId << " not found.\n";
+}
+
+int main() {
+    clrscr();  // Clear screen (Turbo C++ specific)
+
+    int n;
+    cout << "Enter the number of employees: ";
+    cin >> n;
+    
+    Employee emp[100]; // Array of objects
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details for Employee " << i + 1 << ":\n";
+        emp[i].acceptDetails();
+    }
+
+    sortBySalary(emp, n);
+    cout << "\nEmployee Details (Sorted by Salary in Descending Order):\n";
+    cout << "Emp ID\tName\tMobile No\tSalary\n";
+    cout << "------------------------------------\n";
+    for (int i = 0; i < n; i++) {
+        emp[i].displayDetails();
+    }
+
+    int searchId;
+    cout << "\nEnter Employee ID to search: ";
+    cin >> searchId;
+    searchEmployee(emp, n, searchId);
+
+    getch();  // Hold the screen (Turbo C++ specific)
+    return 0;
+}
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+<?php
+$games = array("Cricket", "Football", "Hockey", "Tennis", "Badminton");
+
+echo "<ul>";
+foreach ($games as $game) {
+    echo "<li>$game</li>";
+}
+echo "</ul>";
+?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Games List using AJAX</title>
+    <script>
+        function showGames() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "slip28_a.php", true);
+            xhr.onload = function () {
+                document.getElementById("result").innerHTML = this.responseText;
+            };
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h2>Game List (AJAX + PHP)</h2>
+    <button onclick="showGames()">OK</button>
+    <div id="result" style="margin-top:10px;"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */

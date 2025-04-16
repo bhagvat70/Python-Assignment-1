@@ -1,0 +1,348 @@
+
+/*  1.Write a C++ program accept Worker information Worker Name, No of Hours worked, Pay Rate and Salary. Write necessary functions to calculate and display the salary of Worker.
+(Use default value for Pay_Rate)[15 Marks]        */
+
+
+#include<iostream.h>
+#include<conio.h>
+void worker(char name , int n, int sal, int prate=500){
+	sal=n*prate;
+}
+
+int main(){
+	char name[50];
+	int n,sal;
+	clrscr();
+	cout<<"\nEnter the name of worker:";cin>>name;
+	cout<<"\nEnter the no of hours :"; cin>>n;
+	
+	cout<<"\nName :"<<name;
+	cout<<"\nNo of hours :"<<n;
+	cout<<"\nsalary of worker :"<<worker(name,n,sal);
+	return 0;
+}
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*  2 .Write a C++ program to create a base class Employee (Emp-code, name, salary). Derive two classes as Fulltime (daily wages, number of days)
+ and Parttime (number of working hours, hourly wages). Write a menu driven program to perform following functions:
+1. Accept the details of ‘n’ employees and calculate the salary.
+2.Display the details of ‘n’ employees
+3.Display the details of employee having maximum salary for both types of employees. [25 Marks]         */
+
+#include <iostream.h>
+#include <conio.h>
+#include <stdio.h>
+const int MAX = 50; // Maximum number of employees
+
+class Employee {
+public:
+    int empCode;
+    char name[30];
+    float salary;
+
+    void getBasicDetails() {
+        cout << "\nEnter Employee Code: ";
+        cin >> empCode;
+        cout << "Enter Employee Name: ";
+        cin.ignore();
+        gets(name);
+    }
+
+    void displayBasicDetails() {
+        cout << "\nEmployee Code: " << empCode;
+        cout << "\nEmployee Name: " << name;
+        cout << "\nSalary: " << salary;
+    }
+};
+
+// Full-time Employee Class
+class Fulltime : public Employee {
+public:
+    float dailyWages;
+    int numDays;
+
+    void getDetails() {
+        getBasicDetails();
+        cout << "Enter Daily Wages: ";
+        cin >> dailyWages;
+        cout << "Enter Number of Days Worked: ";
+        cin >> numDays;
+        salary = dailyWages * numDays;
+    }
+
+    void displayDetails() {
+        displayBasicDetails();
+        cout << "\nStatus: Full-Time\n";
+    }
+};
+
+// Part-time Employee Class
+class Parttime : public Employee {
+public:
+    float hourlyWages;
+    int workingHours;
+
+    void getDetails() {
+        getBasicDetails();
+        cout << "Enter Hourly Wages: ";
+        cin >> hourlyWages;
+        cout << "Enter Working Hours: ";
+        cin >> workingHours;
+        salary = hourlyWages * workingHours;
+    }
+
+    void displayDetails() {
+        displayBasicDetails();
+        cout << "\nStatus: Part-Time\n";
+    }
+};
+
+// Main Function
+void main() {
+    clrscr();
+    
+    Fulltime fullEmp[MAX];
+    Parttime partEmp[MAX];
+    int fullCount = 0, partCount = 0;
+    int choice;
+
+    do {
+        cout << "\n\nMENU";
+        cout << "\n1. Enter Employee Details";
+        cout << "\n2. Display Employee Details";
+        cout << "\n3. Find Employee with Maximum Salary";
+        cout << "\n4. Exit";
+        cout << "\nEnter Your Choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                int type;
+                cout << "\n1. Full-time Employee";
+                cout << "\n2. Part-time Employee";
+                cout << "\nEnter Choice: ";
+                cin >> type;
+
+                if (type == 1) {
+                    fullEmp[fullCount].getDetails();
+                    fullCount++;
+                } else if (type == 2) {
+                    partEmp[partCount].getDetails();
+                    partCount++;
+                } else {
+                    cout << "\nInvalid Choice!";
+                }
+                break;
+
+            case 2:
+                cout << "\n--- Full-time Employees ---";
+                for (int i = 0; i < fullCount; i++) {
+                    fullEmp[i].displayDetails();
+                }
+
+                cout << "\n--- Part-time Employees ---";
+		for ( i = 0; i < partCount; i++) {
+                    partEmp[i].displayDetails();
+                }
+                break;
+
+            case 3:
+                if (fullCount == 0 && partCount == 0) {
+                    cout << "\nNo Employee Data Available!";
+                    break;
+                }
+
+                // Find Max Salary for Full-time Employees
+                float maxFullSalary = 0;
+                int maxFullIndex = -1;
+		for ( i = 0; i < fullCount; i++) {
+		    if (fullEmp[i].salary > maxFullSalary) {
+			maxFullSalary = fullEmp[i].salary;
+			maxFullIndex = i;
+		    }
+		}
+
+		// Find Max Salary for Part-time Employees
+		float maxPartSalary = 0;
+		int maxPartIndex = -1;
+		for ( i = 0; i < partCount; i++) {
+		    if (partEmp[i].salary > maxPartSalary) {
+			maxPartSalary = partEmp[i].salary;
+			maxPartIndex = i;
+		    }
+		}
+
+                cout << "\n--- Employee with Maximum Salary ---";
+                if (maxFullIndex != -1) {
+                    cout << "\nFull-time Employee:";
+                    fullEmp[maxFullIndex].displayDetails();
+                }
+                if (maxPartIndex != -1) {
+                    cout << "\nPart-time Employee:";
+                    partEmp[maxPartIndex].displayDetails();
+                }
+                break;
+
+            case 4:
+                cout << "\nExiting Program...";
+                break;
+
+            default:
+                cout << "\nInvalid Choice!";
+        }
+
+    } while (choice != 4);
+
+    getch();
+}
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+/*           */
+
+<?php
+class Employee
+{
+    private $eid,$ename,$edept,$sal;
+    function __construct($a,$b,$c,$d)
+    {
+        $this->eid=$a;
+        $this->ename=$b;
+        $this->edept=$c;
+        $this->sal=$d;
+    }
+    public function getdata()
+    {
+        return $this->sal;
+    }
+    public function display()
+    {
+        echo $this->eid."
+        ";
+        echo $this->ename."
+        ";
+        echo $this->edept."
+        ";
+    }
+}
+class Manager extends Employee{
+    private $bonus;
+    public static $total1=0;
+    function __construct($a,$b,$c,$d,$e)
+    {
+        parent::__construct($a,$b,$c,$d);
+        $this->bonus=$e;
+    }
+    public function max($ob)
+    {
+        $sal=$this->getdata();
+        $total=$sal+$this->bonus;
+        if($total>self::$total1)
+        {
+            self::$total1=$total;
+            return $this;
+        }
+        else
+        {
+            return $ob;
+        }
+    }
+    public function display()
+    {
+        parent::display();
+        echo self::$total1;
+    }
+
+}
+$ob=new Manager(0,"ABC","",0,0);
+$ob1=new Manager(1,"ramdas","computer",28000,2000);
+$ob=$ob1->max($ob);
+$ob2=new Manager(2,"amol","computer",30000,2500);
+$ob=$ob2->max($ob);
+$ob3=new Manager(3,"Prajwal","computer",32000,3000);
+$ob=$ob3->max($ob);
+$ob->display();
+?>
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*           */
+
+<?php
+$xml = simplexml_load_file("slip4_b.xml");
+
+echo "Players with runs > 1200 and wickets >= 50:<br><br>";
+
+foreach($xml->cricket as $c) {
+    if ($c->runs > 1200 && $c->wickets >= 50) {
+        echo "Name: $c->player<br>";
+        echo "Runs: $c->runs<br>";
+        echo "Wickets: $c->wickets<br><br>";
+    }
+}
+
+?> 
+
+
+
+<?xml version='1.0' encoding='UTF-8'?>
+<cricketinfo>
+    <cricket>
+        <player>Sachin Tendulkar</player>
+        <runs>2000</runs>
+        <wickets>100</wickets>
+        <noofnotout>20</noofnotout>
+    </cricket>
+    <cricket>
+        <player>Virat Kohli</player>
+        <runs>800</runs>
+        <wickets>45</wickets>
+        <noofnotout>15</noofnotout>
+    </cricket>
+    <cricket>
+        <player>Rohit Sharma</player>
+        <runs>1300</runs>
+        <wickets>55</wickets>
+        <noofnotout>18</noofnotout>
+    </cricket>
+    <cricket>
+        <player>MS Dhoni</player>
+        <runs>1500</runs>
+        <wickets>60</wickets>
+        <noofnotout>25</noofnotout>
+    </cricket>
+    <cricket>
+        <player>Shubman Gill</player>
+        <runs>1100</runs>
+        <wickets>30</wickets>
+        <noofnotout>12</noofnotout>
+    </cricket>
+</cricketinfo>
+
+
+
+

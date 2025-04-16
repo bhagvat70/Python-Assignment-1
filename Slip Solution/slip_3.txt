@@ -1,0 +1,147 @@
+
+
+/*Q1:Write a C++ program to interchange values of two integer numbers. (Use call by reference)[15 Marks]         */
+
+#include<iostream.h>
+#include<conio.h>
+
+void swap(int &a, int &b){
+ int temp=a;
+ a=b;
+ b=temp;
+}
+int main(){
+ int a, b;
+ clrscr();
+ cout<<"\nEnter the value of a :";cin>>a;
+ cout<<"\nEnter the value of b :";cin>>b;
+ cout<<"\nAfter swapping :";
+ swap(a,b);
+ cout<<"\nValue of a :"<<a;
+ cout<<"\nvalue of b :"<<b;
+ return 0;
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+/* 2.Write a C++ program to accept ‘n’ numbers from user through Command Line Argument. Store all Even 
+and Odd numbers in file “Even.txt” and “Odd.txt” respectively. [25 Marks]        */
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <istream>
+#include <conio.h>
+#include <ctype.h>
+#include <fstream>
+#include <iostream>
+
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+
+    int num;
+    ofstream f1("even.txt"),f2("odd.txt"); 
+
+
+    if (argc == 1)
+        printf("No command line arguments found.\n");
+
+    else
+    {
+        for(int i = 1; i < argc; i++)
+        {
+            num = atoi(argv[i]);
+            if(num%2==0)
+            {
+                f1<<num;
+            }
+            else
+            {
+                f2<<num;
+            }
+        }
+    }
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*           */
+
+<?php
+    class Calculate{
+        public $a;
+        public $b;
+        function __construct($a,$b){
+            $this->a=$a;
+            $this->b=$b;
+        }
+        public function add(){
+            $c=$this->a+$this->b;
+            echo"Addition = $c<br>";
+        }
+        public function subtract(){
+            $c=$this->a-$this->b;
+            echo"Subtract = $c<br>";
+        }
+        public function multiply(){
+            $c=$this->a*$this->b;
+            echo"Multiplication = $c<br>";
+        }
+        public function div(){
+                $c=$this->a/$this->b;
+                echo"Division = $c";
+        }
+    }
+    $calc=new Calculate(4,3);
+    $calc->add();
+    $calc->subtract();
+    $calc->multiply();
+    $calc->div();
+?>
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*           */
+
+
+
+<CricketTeam>
+<Team country="India">
+<player>ROHIT SHARMA</player>
+<runs>2850</runs>
+<wicket>5</wicket>
+</Team>
+
+<Team country="England">
+<player>Ben Stokes</player>
+<runs>2650</runs>
+<wicket>25</wicket>
+</Team>
+<Team country="Australia">
+<player>Steve Smith</player>
+<runs>7000</runs>
+<wicket>20</wicket>
+</Team>
+<Team country="West Indies">
+<player>DJ BRAVO</player>
+<runs>9000</runs>
+<wicket>225</wicket>
+</Team>
+<Team country="Bangladesh">
+<player>Shakib-al-Hasan</player>
+<runs>4190</runs>
+<wicket>135</wicket>
+</Team>
+</CricketTeam>

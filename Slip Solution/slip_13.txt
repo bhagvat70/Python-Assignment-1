@@ -1,0 +1,213 @@
+
+/*1 .Write a C++ program to create a class Product with data members Product id, Product Name, Qty, Price. Write member functions to accept and 
+display Product information also display number of objects created for Product class. (Use Static data member and Static member function)[15 Marks]        */
+
+
+#include <iostream.h>
+#include <conio.h>
+
+class Product {
+    int productID;
+    char productName[50];
+    int qty;
+    float price;
+
+    static int count;
+
+public:
+    Product() {
+        count++;
+    }
+
+    void accept() {
+        cout << "\nEnter Product ID: ";
+        cin >> productID;
+        cout << "Enter Product Name: ";
+        cin >> productName;
+        cout << "Enter Quantity: ";
+        cin >> qty;
+        cout << "Enter Price: ";
+        cin >> price;
+    }
+
+    void display() {
+        cout << "\nProduct ID: " << productID;
+        cout << "\nProduct Name: " << productName;
+        cout << "\nQuantity: " << qty;
+        cout << "\nPrice: " << price;
+    }
+
+    static void showCount() {
+        cout << "\nTotal Products Created: " << count;
+    }
+};
+
+int Product::count = 0;
+
+int main() {
+    clrscr();
+
+    Product p1, p2;
+    
+    cout << "Enter details for first product:";
+    p1.accept();
+
+    cout << "\nEnter details for second product:";
+    p2.accept();
+
+    cout << "\nProduct Details:";
+    p1.display();
+    p2.display();
+
+    Product::showCount();
+
+    getch();
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*   2.Create a C++ class Cuboid with data members length, breadth, and height. Write necessary member functions for the following:
+i. void setvalues(float,float,float) to set values of data members.
+ii. void getvalues( ) to display values of data members.
+iii. float volume( ) to calculate and return the volume of cuboid.
+iv. float surface area( ) to calculate and return the surface area of cuboid.
+(Use Inline function)[25 Marks]        */
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+<?php
+$name = $id = $position = $salary = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $id = $_POST['id'];
+    $position = $_POST['position'];
+    $salary = $_POST['salary'];
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Form</title>
+</head>
+<body>
+    <h2>Enter Employee Details</h2>
+    <form method="post">
+        Name: <input type="text" name="name" value="" required><br>
+        Employee ID: <input type="text" name="id" value="" required><br>
+        Position: <input type="text" name="position" value="" required><br>
+        Salary: <input type="text" name="salary" value="" required><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        echo "<h3>Employee Details:</h3>";
+        echo "Name: $name <br>";
+        echo "Employee ID: $id <br>";
+        echo "Position: $position <br>";
+        echo "Salary: $salary <br>";
+    }
+    ?>
+</body>
+</html>
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+<?php
+$error = "";
+$output = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $age = $_POST['age'];
+    $nationality = $_POST['nationality'];
+
+    // Validation checks
+    if ($name !== strtoupper($name)) {
+        $error = "Name should be uppercase.";
+    } elseif ($age < 18) {
+        $error = "Age should be 18 or older.";
+    } elseif (strtolower($nationality) !== "indian") {
+        $error = "Nationality should be Indian.";
+    } else {
+        $output = "Name: $name <br> Age: $age <br> Nationality: $nationality";
+    }
+    // Send the error or output back to AJAX
+    echo $error ? $error : $output;
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voter Registration</title>
+    <script>
+        // Function to validate and submit the form using AJAX
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var nationality = document.getElementById("nationality").value;
+
+            // Validate form data
+            if (name !== name.toUpperCase()) {
+                alert("Name should be uppercase.");
+                return false;
+            }
+            if (age < 18) {
+                alert("Age should be 18 or older.");
+                return false;
+            }
+            if (nationality.toLowerCase() !== "indian") {
+                alert("Nationality should be Indian.");
+                return false;
+            }
+
+            // Send data to the server using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("result").innerHTML = xhr.responseText; // Show result
+                }
+            };
+            xhr.open("POST", "voter_form.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("name=" + name + "&age=" + age + "&nationality=" + nationality);
+
+            return false; // Prevent normal form submission
+        }
+    </script>
+</head>
+<body>
+    <h2>Voter Registration</h2>
+    <form onsubmit="return validateForm()">
+        Name: <input type="text" id="name" name="name"><br>
+        Age: <input type="number" id="age" name="age"><br>
+        Nationality: <input type="text" id="nationality" name="nationality"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- This is where the output will be displayed after form submission -->
+    <div id="result"></div>
+</body>
+</html>

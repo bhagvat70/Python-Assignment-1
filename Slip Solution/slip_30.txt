@@ -1,0 +1,177 @@
+/*1.Write C++ program to create two classes Integer Array and Float Array with an array as a data member. Write necessary member functions 
+to accept and display array elements of both the classes. Find and display average of both the array. (Use Friend function)[15 Marks]*/
+
+#include <iostream>
+#include<conio.h>
+using namespace std;
+
+
+class FloatArray;
+class IntArray {
+    int arr[10];
+    
+public:
+    void accept() {
+        cout << "Enter 5 integer elements: ";
+        for (int i = 0; i < 5; i++) {
+            cin >> arr[i];
+        }
+    }
+
+    void display() {
+        cout << "Integer Array: ";
+        for (int i = 0; i < 5; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+
+    friend void Average(IntArray, FloatArray);
+};
+
+class FloatArray {
+    float arr[5];
+
+public:
+    void accept() {
+        cout << "Enter 5 float elements: ";
+        for (int i = 0; i < 5; i++) {
+            cin >> arr[i];
+        }
+    }
+
+    void display() {
+        cout << "Float Aarray: ";
+        for (int i = 0; i < 5; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+
+    friend void Average(IntArray, FloatArray);
+};
+
+void Average(IntArray ob1, FloatArray ob2) {
+    float intSum = 0, floatSum = 0;
+
+    for (int i = 0; i < 5; i++) {
+        intSum = intSum+ ob1.arr[i];
+        floatSum = floatSum + ob2.arr[i];
+    }
+
+    cout << "Average of Integer Array: " << intSum / 5 << endl;
+    cout << "Average of Float Array: " << floatSum / 5 << endl;
+}
+
+int main() {
+    IntArray ob1;
+    FloatArray ob2;
+
+    ob1.accept();
+    ob2.accept();
+
+    ob1.display();
+    ob2.display();
+
+    Average(ob1, ob2);
+
+    return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/* 2.Create a C++ class Marksheet with data members Seat No, Student Name, Class, Subject Name[], Int Marks[], Ext Marks[], Total[], Grand Total, Percentage, Grade.
+ Write member function to accept Student information for 5 subjects. Calculate Total, Grand Total, Percentage, Grade and use setw(), setprecision()and setfill()to 
+ display Marksheet.[25 Marks]          */
+
+#include <iostream>
+#include <iomanip> // For setw(), setprecision(), and setfill()
+using namespace std;
+
+class Marksheet {
+    string seatNo, studentName, studentClass;
+    string subjects[5];
+    int intMarks[5], extMarks[5], total[5];
+    int grandTotal = 0;
+    float percentage;
+    char grade;
+
+public:
+    void accept() {
+        cout << "Enter Seat No: ";
+        cin >> seatNo;
+        cout << "Enter Student Name: ";
+        cin>>studentName;
+        cout << "Enter Class: ";
+        cin >> studentClass;
+
+        for (int i = 0; i < 5; i++) {
+            cout << "\nEnter Subject " << i + 1 << " Name: ";
+            cin >> subjects[i];
+            cout << "Enter Internal Marks (Out of 30): ";
+            cin >> intMarks[i];
+            cout << "Enter External Marks (Out of 70): ";
+            cin >> extMarks[i];
+
+            total[i] = intMarks[i] + extMarks[i];
+            grandTotal += total[i];
+        }
+
+        percentage = (grandTotal / 500.0) * 100;
+        grade = (percentage >= 90) ? 'A' :
+                (percentage >= 75) ? 'B' :
+                (percentage >= 60) ? 'C' :
+                (percentage >= 40) ? 'D' : 'F';
+    }
+
+    void display() {
+        cout << "\n------------ MARKSHEET ------------\n";
+        cout << "Seat No:" << setw(10) << seatNo << endl;
+        cout << "Name:" << setw(15) << studentName << endl;
+        cout << "Class:" << setw(10) << studentClass << endl;
+        cout << "-----------------------------------\n";
+        cout << "Subject" << setw(10) << "Int" 
+             << setw(10) << "Ext" << setw(10) << "Total" << endl;
+        cout << "-----------------------------------\n";
+
+        for (int i = 0; i < 5; i++) {
+            cout << setw(10) << left << subjects[i] 
+                 << setw(10) << intMarks[i]
+                 << setw(10) << extMarks[i]
+                 << setw(10) << total[i] << endl;
+        }
+
+        cout << "-----------------------------------\n";
+        cout << "Grand Total:" << setw(10) << setfill('.') << grandTotal << "/500\n";
+        cout << "Percentage:" << setw(10) << fixed << setprecision(2) << percentage << "%\n";
+        cout << "Grade:" << setw(10) << setfill(' ') << grade << endl;
+        cout << "-----------------------------------\n";
+    }
+};
+
+int main() {
+    Marksheet student;
+    student.accept();
+    student.display();
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*           */

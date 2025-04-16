@@ -1,0 +1,461 @@
+/*    1.Write a C++ program using class with data member char str[50] and function replace (char chl, char ch2) every occurrence of chl in str should be replaced 
+with ch2 and return number of replacement it makes use default value for char ch2. (Use ch2 as Default Argument)[15 Marks]       */
+
+#include <iostream.h>
+#include <conio.h>
+#include <string.h>
+
+class mystr {
+public:
+    int replace(char str[], char ch1, char ch2 = 'r') {
+        int count = 0;
+        for (int i = 0; str[i] != '\0'; i++) {
+            if (str[i] == ch1) {
+                str[i] = ch2;
+                count++;
+            }
+        }
+        return count;
+    }
+};
+
+int main() {
+    mystr m;
+    char str[50], ch1;
+
+    cout << "\nEnter string: ";
+    cin >> str;
+
+    cout << "\nEnter the character to replace: ";
+    cin >> ch1;
+
+    int rep = m.replace(str, ch1); // Function call
+
+    cout << "\nNumber of replacements: " << rep;
+    cout << "\nAfter replacement string: " << str << endl;
+
+    return 0;
+}
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*2.Create a C++ class Vector with data members size & pointer to integer. The size of the vector varies so the memory should be allocated dynamically.
+Perform following operations:.
+1. accept vector
+2.display vector in format(10,20,30,…….,)
+3.calculate union of two vectors.
+(use parameterized constructor & copy constructor)[25 Marks]      */
+
+
+
+
+#include <iostream>
+#include <conio.h>
+
+using namespace std;
+
+class Vector {
+    int size;
+    int *arr;
+
+public:
+    Vector(int s) {
+        size = s;
+        arr = new int[size];
+    }
+    Vector(const Vector &v) {
+        size = v.size;
+        arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = v.arr[i];
+        }
+    }
+
+    ~Vector() {
+        delete[] arr;
+    }
+
+    void accept() {
+        cout << "Enter " << size << " elements: ";
+        for (int i = 0; i < size; i++) {
+            cin >> arr[i];
+        }
+    }
+
+    void display() {
+        cout << "(";
+        for (int i = 0; i < size; i++) {
+            cout << arr[i];
+            if (i < size - 1) cout << ", ";
+        }
+        cout << ")\n";
+    }
+
+   
+    static Vector calculateUnion(Vector &v1, Vector &v2) {
+        int *temp = new int[v1.size + v2.size];
+        int unionSize = 0;
+
+    
+        for (int i = 0; i < v1.size; i++) {
+            temp[unionSize++] = v1.arr[i];
+        }
+
+    
+        for (int i = 0; i < v2.size; i++) {
+            bool found = false;
+            for (int j = 0; j < v1.size; j++) {
+                if (v2.arr[i] == v1.arr[j]) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                temp[unionSize++] = v2.arr[i];
+            }
+        }
+
+
+        Vector result(unionSize);
+        for (int i = 0; i < unionSize; i++) {
+            result.arr[i] = temp[i];
+        }
+
+        delete[] temp;
+        return result;
+    }
+};
+
+int main() {
+    int size1, size2;
+    
+    cout << "Enter size of first vector: ";
+    cin >> size1;
+    Vector v1(size1);
+    v1.accept();
+
+    cout << "Enter size of second vector: ";
+    cin >> size2;
+    Vector v2(size2);
+    v2.accept();
+
+
+    cout << "First vector: ";
+    v1.display();
+    cout << "Second vector: ";
+    v2.display();
+
+    
+    Vector unionVector = Vector::calculateUnion(v1, v2);
+    cout << "Union of vectors: ";
+    unionVector.display();
+
+    return 0;
+}
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+/*   2.Create a C++ class Vector with data members size & pointer to integer. The size of the vector varies so the memory should be allocated
+ dynamically.Perform following operations:.
+1. accept vector
+2.display vector in format(10,20,30,…….,)
+3.calculate union of two vectors.
+(use parameterized constructor & copy constructor)[25 Marks]        */
+
+#include <iostream.h>
+#include <conio.h>
+
+class Vector {
+    int size;
+    int *arr;
+
+public:
+    Vector(int s) {
+        size = s;
+        arr = new int[size];
+    }
+
+    Vector(const Vector &v) {
+        size = v.size;
+        arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = v.arr[i];
+        }
+    }
+
+    ~Vector() {
+        delete[] arr;
+    }
+
+    void accept() {
+        cout << "\nEnter " << size << " elements: ";
+        for (int i = 0; i < size; i++) {
+            cin >> arr[i];
+        }
+    }
+
+    void display() {
+        cout << "(";
+        for (int i = 0; i < size; i++) {
+            cout << arr[i];
+            if (i < size - 1) cout << ",";
+        }
+        cout << ")\n";
+    }
+
+    Vector unionVector(Vector v2) {
+        int newSize = size + v2.size;
+        int *temp = new int[newSize];
+
+        int index = 0;
+        for (int i = 0; i < size; i++) {
+            temp[index++] = arr[i];
+        }
+
+        for (int i = 0; i < v2.size; i++) {
+            int isDuplicate = 0;
+            for (int j = 0; j < size; j++) {
+                if (v2.arr[i] == arr[j]) {
+                    isDuplicate = 1;
+                    break;
+                }
+            }
+            if (!isDuplicate) {
+                temp[index++] = v2.arr[i];
+            }
+        }
+
+        Vector unionVec(index);
+        for (int i = 0; i < index; i++) {
+            unionVec.arr[i] = temp[i];
+        }
+
+        delete[] temp;
+        return unionVec;
+    }
+};
+
+void main() {
+    clrscr();
+
+    int size1, size2;
+    cout << "Enter size of first vector: ";
+    cin >> size1;
+    Vector v1(size1);
+    v1.accept();
+
+    cout << "Enter size of second vector: ";
+    cin >> size2;
+    Vector v2(size2);
+    v2.accept();
+
+    cout << "\nFirst Vector: ";
+    v1.display();
+    cout << "Second Vector: ";
+    v2.display();
+
+    Vector vUnion = v1.unionVector(v2);
+    cout << "Union of Vectors: ";
+    vUnion.display();
+
+    getch();
+}
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  <html>
+<body>
+<form action="slip7_a.php" method="get">
+    <h1>Enter weight  in gram</h1>
+	<input type="text" name="cel">
+	<h1>Enter weight in kg</h1>
+	<input type="text" name="far">
+	<br><h1>SELECT YOUR CHOICE:<br> 
+		<input type="radio" name=r value="1">1.Convert to kg<br>
+		<input type="radio" name=r  value="2">2.Convert to gram<br></h1>
+	<input type="submit" value="calculate">
+</form>
+</body>
+</html>
+
+<?php
+$cs=$_GET["cel"];
+$f=$_GET["far"];
+$ch=$_GET["r"];
+                        interface kg
+        {
+                        function convert_to_kg();
+                        function convert_to_gram();
+        }
+                  
+class Convert implements Kg
+{
+	public $c,$f;
+	function __construct($cs,$f)
+	{
+	  $this->c=$cs;
+	  $this->f=$f;
+	}
+
+	function convert_to_kg()
+	{
+		$ans=($this->c/1000);
+		echo"Gram into Kilogram conversion:".$ans;
+	}
+	function convert_to_gram()
+	{
+		$ans=($this->f*1000);
+		echo"Kilogram into gram conversion:".$ans;
+	}
+
+}
+
+$cs=$_GET["cel"];
+$f=$_GET["far"];
+$ch=$_GET["r"];
+$obj= new Convert($cs,$f);
+if($ch==1)
+{
+	$obj->convert_to_kg();
+}
+if($ch==2)
+{
+	$obj->convert_to_gram();
+}
+?>
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE DATABASE sybbaca;
+
+USE sybbaca;
+
+CREATE TABLE project7 (
+    p_group_no INT PRIMARY KEY,
+    Project_title VARCHAR(100)
+);
+
+
+CREATE TABLE student7 (
+    Seat_no VARCHAR(20) PRIMARY KEY,
+    Name VARCHAR(100),
+    Class VARCHAR(10),
+    p_group_no INT,
+    FOREIGN KEY (p_group_no) REFERENCES project7(p_group_no)
+);
+
+
+INSERT INTO project7 (p_group_no, Project_title) VALUES
+(1, 'Smart Agriculture'),
+(2, 'Online Shopping'),
+(3, 'Attendance System');
+
+
+INSERT INTO student7 (Seat_no, Name, Class, p_group_no) VALUES
+('S001', 'Bhagvat', 'SYBBACA', 1),
+('S002', 'Amol', 'SYBBACA', 1),
+('S003', 'Sumit', 'SYBBACA', 2),
+('S004', 'Neha', 'SYBBACA', 3);
+
+
+-------------------------------------------
+
+
+<html>
+<script type="text/javascript">
+function display() {
+    var name = f1.txt.value;
+    var xmlhttp;
+
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.open("GET", "slip7_b.php?txt=" + name, false);
+    xmlhttp.send();
+    document.getElementById('result').innerHTML = xmlhttp.responseText;
+}
+</script>
+<body>
+    <form name="f1">
+        Enter Project_title:
+        <input type="text" name="txt" onKeyUp="display()" /><br>
+    </form>
+    <div id='result'></div>
+</body>
+</html>
+
+
+<?php
+$con = mysqli_connect("localhost", "root", "", "sybbaca");
+
+if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$q = $_GET['txt'];
+
+// SQL query
+$sql = "SELECT * FROM project7, student7 WHERE project7.p_group_no = student7.p_group_no AND Project_title = '$q'";
+$result = mysqli_query($con, $sql);
+
+// Check if query failed
+if (!$result) {
+    echo "Error in query: " . mysqli_error($con);
+    exit;
+}
+
+// Display table
+echo "<table border='1'>
+<tr>
+<th>Seat No</th>
+<th>Name</th>
+<th>Class</th>
+<th>Project Title</th>
+</tr>";
+
+// Show rows if found
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<tr>";
+        echo "<td>" . $row['Seat_no'] . "</td>";
+        echo "<td>" . $row['Name'] . "</td>";
+        echo "<td>" . $row['Class'] . "</td>";
+        echo "<td>" . $row['Project_title'] . "</td>";
+        echo "</tr>";
+    }
+} else {
+    echo "<tr><td colspan='4'>No records found.</td></tr>";
+}
+
+echo "</table>";
+mysqli_close($con);
+?>
+
+
+
+
+
